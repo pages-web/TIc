@@ -19,7 +19,7 @@ const CartItemCounter = ({
     <div className="flex h-16 flex-col justify-between">
       <Price
         className="flex justify-end space-y-2 text-right text-sm"
-        amount={unitPrice * count + ''}
+        amount={unitPrice * count}
       />
       <Counter size="sm">
         <CounterButton

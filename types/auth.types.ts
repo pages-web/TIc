@@ -16,7 +16,7 @@ export interface IConfig {
   name: string;
   erxesAppToken: string;
   paymentIds: string[];
-  checkRemainder: boolean;
+  isCheckRemainder: boolean;
   deliveryConfig: {
     productId?: string;
   };

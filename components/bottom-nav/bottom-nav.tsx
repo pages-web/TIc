@@ -6,7 +6,7 @@ import {
   MenuIcon,
   SearchIcon,
   ShoppingCart,
-  User2Icon
+  User2Icon,
 } from 'lucide-react';
 import { Button, ButtonProps } from '../ui/button';
 import { cn } from '@/lib/utils';
@@ -23,28 +23,28 @@ const getItems = (cartLineItemsCount?: number) => [
   {
     label: 'Эхлэл',
     Icon: HomeIcon,
-    path: '/'
+    path: '/',
   },
   {
     label: 'Дэлгүүр',
     Icon: MenuIcon,
-    path: '/category'
+    path: '/category',
   },
   {
     label: 'Хайх',
     Icon: SearchIcon,
-    path: '/search'
+    path: '/search',
   },
   {
     label: 'Сагс',
     Icon: ShoppingCart,
-    path: '/cart'
+    path: '/cart',
   },
   {
     label: 'Профайл',
     Icon: User2Icon,
-    path: '/profile'
-  }
+    path: '/profile',
+  },
 ];
 
 const BottomNav = () => {
@@ -69,7 +69,7 @@ const BottomNav = () => {
             >
               <Badge
                 variant="outline"
-                className="absolute right-1/2 top-2 bg-background p-0 h-4 min-w-4 rounded-lg justify-center text-xs text-center leading-none translate-x-5"
+                className="absolute right-1/2 top-2 bg-background p-0 h-4 min-w-4 rounded-full justify-center text-xs text-center leading-none translate-x-5"
               >
                 <CartCount />
               </Badge>
@@ -98,7 +98,7 @@ export const BottomNavItem = memo(
     label,
     Icon,
     onClick,
-    className
+    className,
   }: ButtonProps & {
     path: string;
     label: string;

@@ -4,25 +4,28 @@ import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent
+  AccordionContent,
 } from '../ui/accordion';
 import Rate from '../ui/rate';
 
 const ProductAccordion = ({
-  description
+  description,
 }: {
   description?: string;
   _id: string;
 }) => {
   return (
-    <Accordion type="multiple">
+    <Accordion type="multiple" defaultValue={['item-1']}>
       {!!description && (
         <AccordionItem value="item-1">
           <AccordionTrigger className="text-xl font-semibold">
             Бүтээгдэхүүний дэлгэрэнгүй мэдээлэл
           </AccordionTrigger>
           <AccordionContent>
-            <div dangerouslySetInnerHTML={{ __html: description }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: description }}
+              className="[&_*]:font-family-inherit"
+            />
           </AccordionContent>
         </AccordionItem>
       )}

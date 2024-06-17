@@ -1,12 +1,8 @@
 import { IProductDetail } from '@/types/products.types';
-import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { PackageIcon, ShieldCheckIcon, Tag, WarehouseIcon } from 'lucide-react';
+import { Card, CardContent, CardHeader } from '../ui/card';
 import Price from '../price/price';
 import { Separator } from '../ui/separator';
 import AddToCart from './AddToCart.client';
-import Link from 'next/link';
-import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import Remainder from './remainder.client';
 import ProductReview from './productReview';
@@ -16,7 +12,7 @@ const PurchaseCard = ({
   unitPrice,
   _id,
   remainder,
-  attachment
+  attachment,
 }: IProductDetail) => {
   const product = { name, unitPrice, _id, remainder, attachment };
   return (
@@ -37,7 +33,7 @@ const PurchaseCard = ({
           {name}
         </h1>
         <div>
-          <Price amount={unitPrice + ''} className="mr-2 font-bold text-2xl" />
+          <Price amount={unitPrice} className="mr-2 font-bold text-2xl" />
 
           {/* <Price
             amount={unitPrice + ''}

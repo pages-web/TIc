@@ -2,7 +2,7 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from '@/components/ui/card';
 import { Separator } from '../ui/separator';
 import { format } from 'date-fns';
@@ -41,19 +41,17 @@ const OrderGeneral = () => {
       <CardContent className="py-3 md:py-4 text-sm md:text-base">
         <div className="flex justify-between items-center">
           <span>Барааны дүн</span>
-          <Price
-            amount={totalAmount - (deliveryProduct?.unitPrice || 0) + ''}
-          />
+          <Price amount={totalAmount - (deliveryProduct?.unitPrice || 0)} />
         </div>
         <div className="flex justify-between items-center">
           <span>Хүргэлтийн төлбөр</span>
-          <Price amount={(deliveryProduct?.unitPrice || 0).toString()} />
+          <Price amount={deliveryProduct?.unitPrice || 0} />
         </div>
       </CardContent>
       <Separator />
       <CardFooter className="justify-between py-3 md:py-4 font-bold text-base md:text-lg text-nowrap">
         <div>Нийт төлөх дүн</div>
-        <Price amount={totalAmount + ''} />
+        <Price amount={totalAmount} />
       </CardFooter>
     </Card>
   );

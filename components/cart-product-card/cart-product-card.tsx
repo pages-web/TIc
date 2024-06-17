@@ -10,22 +10,26 @@ import { Counter, CounterButton, CounterInput } from '../counter/counter';
 import { updateCartAtom } from '@/store/cart.store';
 
 const CartProductCard = ({
-  cartItemAtom
+  cartItemAtom,
 }: {
   cartItemAtom: Atom<OrderItem>;
 }) => {
-  const { _id, productName, unitPrice, count } = useAtomValue(cartItemAtom);
+  const { _id, productName, unitPrice, count, productImgUrl, discountAmount } =
+    useAtomValue(cartItemAtom);
   const [loading, changeCartItem] = useAtom(updateCartAtom);
   return (
     <div className="relative flex first:border-t border-b border-neutral-200 hover:shadow-lg min-w-[320px] py-4 md:px-4 last:mb-0 last:border-b-0 md:last:border-b">
       <div className="relative overflow-hidden rounded-md w-[100px] md:w-[176px]">
         <Link href={`/product/${_id}`}>
-          <Image src={''} alt="" width={300} height={300} />
+          <Image src={productImgUrl} alt="" width={300} height={300} />
         </Link>
-        <div className="absolute top-0 left-0 text-white bg-indigo-600 py-1 pl-1.5 pr-2 text-xs font-medium inline-flex items-center">
-          <TagIcon className="mr-1 h-3 w-3" />
-          Sale
-        </div>
+        {(discountAmount || 0) > 0 && (
+          <div className="absolute top-0 left-0 text-white bg-indigo-600 py-1 pl-1.5 pr-2 text-xs font-medium inline-flex items-center">
+            <TagIcon className="mr-1 h-3 w-3" />
+            {(discountAmount || 0) / unitPrice + (discountAmount || 0) * 100}%
+            Sale
+          </div>
+        )}
       </div>
       <div className="flex flex-col pl-4 min-w-[180px] flex-1 ">
         <Button
@@ -44,7 +48,7 @@ const CartProductCard = ({
             />
             <CounterInput
               value={count}
-              onChange={e =>
+              onChange={(e) =>
                 changeCartItem({ _id, count: Number(e.target.value) })
               }
               disabled={loading}
@@ -64,7 +68,7 @@ const CartProductCard = ({
             Хасах
           </Button>
           <span className="font-bold md:ml-auto md:order-1 text-sm md:text-lg">
-            <Price amount={unitPrice + ''} />
+            <Price amount={unitPrice} />
           </span>
         </div>
       </div>

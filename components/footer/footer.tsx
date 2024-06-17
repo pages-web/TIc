@@ -9,6 +9,7 @@ import { icons } from './icons';
 const Footer = async () => {
   const { branchDetail, name } = await getBranchDetail();
   const { email, phoneNumber, links, address, coordinate } = branchDetail || {};
+
   return (
     <footer>
       {!!branchDetail && (
@@ -38,15 +39,17 @@ const Footer = async () => {
               )}
               <Col title="Биднийг дагаарай">
                 <div className="flex items-center pb-2 gap-1 -ml-2">
-                  {Object.keys(links || {}).map((link) => (
-                    <SocialLink
-                      href={(links || {})[link] || ''}
-                      icon={link}
-                      key={link}
-                    >
-                      {link}
-                    </SocialLink>
-                  ))}
+                  {Object.keys(links || {}).map((link) =>
+                    !!links[link] ? (
+                      <SocialLink
+                        href={(links || {})[link] || ''}
+                        icon={link}
+                        key={link}
+                      >
+                        {link}
+                      </SocialLink>
+                    ) : null
+                  )}
                 </div>
               </Col>
             </Col>

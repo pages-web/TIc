@@ -10,12 +10,12 @@ const ItemsSummary = () => {
 
   return (
     <>
-      {items.map(item => (
+      {items.map((item) => (
         <div className="flex justify-between items-start" key={item._id}>
           {item.productName}
           <div className="flex justify-between w-1/3">
             <Badge variant="secondary">x{item.count}</Badge>
-            <Price amount={item.unitPrice + ''} />
+            <Price amount={item.unitPrice} />
           </div>
         </div>
       ))}

@@ -31,6 +31,8 @@ const articles = gql`
     ) {
       _id
       summary
+      title
+      content
       image {
         url
       }

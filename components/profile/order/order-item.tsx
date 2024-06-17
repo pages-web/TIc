@@ -59,7 +59,7 @@ const OrderItem = ({
         </div>
         <div className="text-right md:w-2/12 md:mr-4">
           <div className="text-black/60">Захиалгын дүн</div>
-          <Price className=" text-base" amount={totalAmount + ''} />
+          <Price className=" text-base" amount={totalAmount} />
         </div>
       </Link>
     </Button>

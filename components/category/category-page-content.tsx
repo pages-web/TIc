@@ -6,6 +6,7 @@ import ProductCard from '../product-card/product-card';
 import ProductPagination from '../product-pagination/product-pagination';
 import { IPageProps } from '@/types';
 import ProductsContainer from '../product-card/products-container';
+import SearchBadge from './search-badge';
 
 export interface CategoryPageContentProps extends PropsWithChildren {
   title: string;
@@ -20,7 +21,7 @@ const CategoryPageContent = ({
   sidebar,
   products,
   totalProducts,
-  searchParams
+  searchParams,
 }: CategoryPageContentProps) => {
   return (
     <div className="mb-20">
@@ -29,13 +30,13 @@ const CategoryPageContent = ({
         <CategorySidebar>{sidebar}</CategorySidebar>
         <div className="flex-1">
           <div className="flex justify-between items-center py-3 mb-2 sticky md:py-0 md:static top-0 z-50 bg-background">
-            <span className="font-bold md:text-lg">
-              {totalProducts} бүтээгдэхүүн
+            <span className="font-bold md:text-lg inline-flex items-center">
+              {totalProducts} бүтээгдэхүүн <SearchBadge />
             </span>
             <CategorySidebarTrigger />
           </div>
           <ProductsContainer>
-            {products.map(product => (
+            {products.map((product) => (
               <ProductCard key={product._id} {...product} />
             ))}
           </ProductsContainer>

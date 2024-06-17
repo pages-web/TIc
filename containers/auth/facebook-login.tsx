@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import {
   fbLogin,
   getFacebookLoginStatus,
-  initFacebookSdk
+  initFacebookSdk,
 } from '@/lib/facebook';
 import { FacebookIcon } from 'lucide-react';
 import { useFacebookLogin } from '@/sdk/hooks/auth';
@@ -16,7 +16,7 @@ const FacebookLogin = () => {
   const {
     facebookLogin,
     loading: loadingAction,
-    clientPortalId
+    clientPortalId,
   } = useFacebookLogin();
 
   const handleLogin = (response: { authResponse: { accessToken: string } }) => {
@@ -24,21 +24,21 @@ const FacebookLogin = () => {
       facebookLogin({
         variables: {
           clientPortalId,
-          accesToken: response?.authResponse?.accessToken
-        }
+          accessToken: response?.authResponse?.accessToken,
+        },
       });
   };
 
   useEffect(() => {
     initFacebookSdk().then(() => {
       getFacebookLoginStatus().then(
-        response => response && handleLogin(response)
+        (response) => response && handleLogin(response)
       );
     });
   }, []);
 
   function login() {
-    fbLogin().then(response => handleLogin(response));
+    fbLogin().then((response) => handleLogin(response));
   }
 
   return (

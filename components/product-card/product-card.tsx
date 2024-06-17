@@ -26,8 +26,8 @@ const ProductCard = ({
             src={attachment?.url || ''}
             alt=""
             className="rounded-md aspect-square w-full h-full absolute inset-0"
-            width={320}
-            height={320}
+            width={500}
+            height={500}
             quality={100}
             key={_id}
           />
@@ -44,7 +44,7 @@ const ProductCard = ({
           className="block py-2 font-bold"
           data-testid="product-card-vertical-price"
         >
-          <Price amount={unitPrice + ''} />
+          <Price amount={unitPrice} />
         </span>
         <ProductCardAdd {...product} />
       </div>

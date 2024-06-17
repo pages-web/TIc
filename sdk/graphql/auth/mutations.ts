@@ -137,7 +137,7 @@ const posChooseConfig = gql`
 const fbLogin = gql`
   mutation ClientPortalFacebookAuthentication(
     $clientPortalId: String!
-    $accessToken: String
+    $accessToken: String!
   ) {
     clientPortalFacebookAuthentication(
       clientPortalId: $clientPortalId
@@ -148,8 +148,8 @@ const fbLogin = gql`
 
 const googleLogin = gql`
   mutation ClientPortalGoogleAuthentication(
-    $clientPortalId: String
-    $code: String
+    $clientPortalId: String!
+    $code: String!
   ) {
     clientPortalGoogleAuthentication(
       clientPortalId: $clientPortalId

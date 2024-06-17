@@ -18,7 +18,7 @@ const ResetPassword = () => {
       </div>
       <div className="mt-8 text-center text-sm relative md:mb-20">
         <Button variant="link" className="text-sm" asChild>
-          <Link href="/signup">Нэвтрэх?</Link>
+          <Link href="/login">Нэвтрэх?</Link>
         </Button>
       </div>
     </>

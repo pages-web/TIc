@@ -6,7 +6,7 @@ import { useAtomValue } from 'jotai';
 
 const CartTotal = () => {
   const totalAmount = useAtomValue(cartTotalAtom);
-  return <Price amount={totalAmount + ''} />;
+  return <Price amount={totalAmount} />;
 };
 
 export default CartTotal;

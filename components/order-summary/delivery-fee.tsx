@@ -12,15 +12,16 @@ const DeliveryFee = () => {
       <div className="flex justify-between items-start">
         <span>Захиалгын төлбөр</span>
         <Price
-          amount={(deliveryProduct
-            ? totalAmount - deliveryProduct.unitPrice
-            : totalAmount
-          ).toString()}
+          amount={
+            deliveryProduct
+              ? totalAmount - deliveryProduct.unitPrice
+              : totalAmount
+          }
         />
       </div>
       <div className="flex justify-between items-start">
         <span>Хүргэлтийн төлбөр</span>
-        <Price amount={(deliveryProduct?.unitPrice || 0).toString()} />
+        <Price amount={deliveryProduct?.unitPrice || 0} />
       </div>
     </>
   );

@@ -8,7 +8,7 @@ const OrderProduct = ({
   productName,
   status,
   count,
-  unitPrice
+  unitPrice,
 }: OrderItem) => {
   const name = productName?.split('-')[1];
   const code = productName?.split('-')[0];
@@ -30,9 +30,9 @@ const OrderProduct = ({
         </div>
         <div>
           <div className="flex gap-4 pt-5">
-            <Price amount={unitPrice + ''} />
+            <Price amount={unitPrice} />
             <Badge variant="secondary">x{count}</Badge>
-            <Price amount={unitPrice * count + ''} className="font-semibold" />
+            <Price amount={unitPrice * count} className="font-semibold" />
           </div>
         </div>
       </div>

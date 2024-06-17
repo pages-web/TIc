@@ -24,14 +24,11 @@ const CurrentUser = () => {
     );
 
   if (currentUser) {
-    const { firstName, attachment, lastName } = currentUser;
+    const { firstName, avatar, lastName } = currentUser;
     return (
       <Avatar asChild>
         <Link href="/profile">
-          <AvatarImage
-            src={readFile(attachment?.url)}
-            alt={currentUser.firstName}
-          />
+          <AvatarImage src={avatar} alt={currentUser.firstName} />
           <AvatarFallback>
             {(firstName || 'P')[0]}
             {(lastName || '')[0]}

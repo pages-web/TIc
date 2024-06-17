@@ -32,7 +32,7 @@ const currentConfig = gql`
       name
       description
       pdomain
-      checkRemainder
+      isCheckRemainder
       branchId
       initialCategoryIds
       uiOptions {

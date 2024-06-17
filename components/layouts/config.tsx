@@ -7,10 +7,10 @@ import { useLayoutEffect } from 'react';
 
 const ConfigProvider = ({
   children,
-  config
+  config,
 }: React.PropsWithChildren & { config: IConfig }) => {
   const setConfig = useSetAtom(configAtom);
-  const { deliveryConfig, erxesAppToken, paymentIds, name, checkRemainder } =
+  const { deliveryConfig, erxesAppToken, paymentIds, name, isCheckRemainder } =
     config || {};
 
   useLayoutEffect(() => {
@@ -19,7 +19,7 @@ const ConfigProvider = ({
       erxesAppToken,
       paymentIds,
       name,
-      checkRemainder
+      isCheckRemainder,
     });
   }, []);
 
