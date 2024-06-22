@@ -41,7 +41,7 @@ export function CategoryNav({
 
           if (childrenCats.length === 0)
             return (
-              <NavigationMenuItem>
+              <NavigationMenuItem key={_id}>
                 <Link
                   href={{ pathname: '/category', query: { order: order } }}
                   legacyBehavior
