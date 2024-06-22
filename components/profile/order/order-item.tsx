@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { cn, getOrderStatus, readFile } from '@/lib/utils';
 import cloudflareLoader from '@/lib/image-loader';
+import { useAtomValue } from 'jotai';
+import { configAtom } from '@/store/auth.store';
 
 const OrderItem = ({
   number,
@@ -16,6 +18,7 @@ const OrderItem = ({
   status,
   paidDate
 }: IOrder) => {
+  const { deliveryConfig } = useAtomValue(configAtom) || {};
   return (
     <Button
       variant="outline"
@@ -39,23 +42,25 @@ const OrderItem = ({
           </div>
         </div>
         <div className="flex flex-row-reverse md:w-3/12 justify-end">
-          {items.map((item, index) => (
-            <Avatar
-              className={cn('h-12 w-12 border-2', index > 0 && '-mr-3')}
-              key={item.productName}
-            >
-              <AvatarImage
-                src={cloudflareLoader({
-                  src: item.productImgUrl || '',
-                  width: 60,
-                  quality: 100
-                })}
-              />
-              <AvatarFallback>
-                {(item.productName || '').toUpperCase()[0]}
-              </AvatarFallback>
-            </Avatar>
-          ))}
+          {items
+            .filter(el => deliveryConfig?.productId !== el.productId)
+            .map((item, index) => (
+              <Avatar
+                className={cn('h-12 w-12 border-2', index > 0 && '-mr-3')}
+                key={item.productName}
+              >
+                <AvatarImage
+                  src={cloudflareLoader({
+                    src: item.productImgUrl || '',
+                    width: 60,
+                    quality: 100
+                  })}
+                />
+                <AvatarFallback>
+                  {(item.productName || '').toUpperCase()[0]}
+                </AvatarFallback>
+              </Avatar>
+            ))}
         </div>
         <div className="text-right md:w-2/12 md:mr-4">
           <div className="text-black/60">Захиалгын дүн</div>
