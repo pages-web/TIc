@@ -1,20 +1,6 @@
 import { useMediaQuery } from '@/hooks/use-media-query';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle
-} from '@/components/ui/drawer';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Drawer, DrawerContent } from '@/components/ui/drawer';
 import { openDetailAtom } from '@/store/payment.store';
 import { useAtom } from 'jotai';
 import PaymentDetail from './payment-detail';

@@ -10,7 +10,7 @@ const ProfileLayout = ({
 }: React.PropsWithChildren & { title: string; description: string }) => {
   return (
     <PrivateRoute>
-      <div className="space-y-3 md:space-y-6 pt-6 md:pt-10 pb-16 container">
+      <div className="space-y-3 md:space-y-6 pt-6 md:pt-10 flex-auto container">
         <div className="space-y-0.5 -mx-2 md:mx-0">
           <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
           <p className="text-muted-foreground">{description}</p>

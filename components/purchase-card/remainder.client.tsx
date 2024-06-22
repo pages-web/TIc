@@ -2,7 +2,7 @@
 
 import { checkRemainderAtom } from '@/store/auth.store';
 import { useAtomValue } from 'jotai';
-import { Badge } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const Remainder = ({ remainder }: { remainder?: number | null }) => {
   const checkRemainder = useAtomValue(checkRemainderAtom);

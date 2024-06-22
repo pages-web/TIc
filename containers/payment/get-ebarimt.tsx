@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogTrigger,
   DialogHeader,
-  DialogClose,
+  DialogClose
 } from '@/components/ui/dialog';
 import { XIcon } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
@@ -27,7 +27,7 @@ const GetEbarimt = () => {
             </Button>
           </DialogClose>
         </DialogHeader>
-        {putResponses.map((pt) => (
+        {putResponses.map(pt => (
           <>
             <div className="p-4">
               <div className="relative aspect-square mx-auto max-w-80">
@@ -43,12 +43,12 @@ const GetEbarimt = () => {
             <div className="grid grid-cols-6 text-sm gap-2 pb-4">
               <div className="col-span-6 md:col-span-4">
                 <div className="text-foreground/60 text-xs leading-5">ДДТД</div>
-                <div className="font-medium leading-snug">{pt.billId}</div>
+                <div className="font-medium leading-snug">{pt.id}</div>
               </div>
               <div className="col-span-3 md:col-span-2">
                 <div className="text-foreground/60">Харилцагч</div>
                 <div className="font-medium leading-snug">
-                  {pt.billType === '3' ? 'Байгуулга' : 'Иргэн'}
+                  {pt.customerName || pt.customerTin}
                 </div>
               </div>
 
@@ -59,7 +59,7 @@ const GetEbarimt = () => {
               <div className="col-span-4 md:col-span-2">
                 <div className="text-foreground/60">Бүртгүүлэх дүн</div>
                 <div className="font-medium leading-snug">
-                  <Price amount={pt.amount || 0} />
+                  <Price amount={pt.totalAmount || 0} />
                 </div>
               </div>
             </div>

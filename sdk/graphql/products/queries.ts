@@ -145,6 +145,7 @@ const productDetail = gql`
       type
       createdAt
       unitPrice
+      remainder
       category {
         order
         name
@@ -177,6 +178,6 @@ const queries = {
   productSimilarities,
   productDetail,
   productsMeta,
-  productReview,
+  productReview
 };
 export default queries;

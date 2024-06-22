@@ -4,7 +4,7 @@ import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import {
   currentUserAtom,
   loadingUserAtom,
-  refetchCurrentUserAtom,
+  refetchCurrentUserAtom
 } from '@/store/auth.store';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
@@ -16,14 +16,16 @@ export const useCurrentUser = (onCompleted?: (data: any) => void) => {
 
   const { data, refetch } = useQuery(queries.currentUser, {
     onError(error) {
-      if (error.message === 'token expired') {
-        sessionStorage.removeItem('token');
-      }
-      if (error.message !== 'User is not logged in') {
-        toast.error(error.message);
-      }
       setLoading(false);
-    },
+      if (error.message === 'token expired') {
+        return sessionStorage.removeItem('token');
+      }
+      if (error.message === 'User is not logged in') {
+        onCompleted && onCompleted(null);
+        return setCurrentUser(null);
+      }
+      toast.error(error.message);
+    }
   });
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export const useUserDetail = () => {
   const { loading, refetch } = useQuery(queries.userDetail, {
     onCompleted({ clientPortalCurrentUser }) {
       setCurrentUser({ ...currentUser, ...clientPortalCurrentUser });
-    },
+    }
   });
 
   useEffect(() => {

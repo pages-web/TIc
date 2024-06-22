@@ -1,7 +1,6 @@
 'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { readFile } from '@/lib/utils';
 import { useCurrentUser } from '@/sdk/queries/auth.client';
 import { UserIcon, Loader2Icon } from 'lucide-react';
 import Link from 'next/link';

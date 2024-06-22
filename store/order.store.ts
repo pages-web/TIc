@@ -120,7 +120,7 @@ export const changeDeliveryInfoAtom = atom(
       description: `
         Нэр: ${v.firstName},
         ${v.lastName && `Овог: ${v.lastName},`}
-        Утасны дугаар: ${v.lastName},
+        Утасны дугаар: ${v.phone},
         И-Мэйл хаяг: ${v.email},
         ------------------------- 
         Хот: ${v.city},

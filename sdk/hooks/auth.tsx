@@ -5,6 +5,7 @@ import { loadingUserAtom, refetchCurrentUserAtom } from '@/store/auth.store';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { onError } from '@/lib/utils';
+import { fbLogout } from '@/lib/facebook';
 
 const clientPortalId = process.env.NEXT_PUBLIC_CP_ID;
 
@@ -30,13 +31,13 @@ const useLoginCallback = () => {
         triggerRefetchUser(true);
         setLoadingUser(true);
         toast.success('Сайн байна уу?', {
-          description: 'Та амжилттай нэвтэрлээ',
+          description: 'Та амжилттай нэвтэрлээ'
         });
 
         router.push(from ? from : '/');
         !!callback && callback();
       }
-    },
+    }
   };
 };
 
@@ -47,7 +48,7 @@ export const useLogin = (onCompleted?: () => void) => {
     onCompleted: ({ clientPortalLogin }) => {
       loginCallback(clientPortalLogin, onCompleted);
     },
-    onError,
+    onError
   });
 
   return { login, loading, clientPortalId };
@@ -59,7 +60,7 @@ export const useGoogleLogin = () => {
     onCompleted({ clientPortalGoogleAuthentication }) {
       loginCallback(clientPortalGoogleAuthentication);
     },
-    onError,
+    onError
   });
   return { googleLogin, loading, clientPortalId };
 };
@@ -70,7 +71,7 @@ export const useFacebookLogin = () => {
     onCompleted({ clientPortalFacebookAuthentication }) {
       loginCallback(clientPortalFacebookAuthentication);
     },
-    onError,
+    onError
   });
   return { facebookLogin, loading, clientPortalId };
 };
@@ -79,10 +80,10 @@ export const useRegister = (
   onCompleted?: BaseMutationOptions['onCompleted']
 ) => {
   const [register, { loading }] = useMutation(mutations.createUser, {
-    onCompleted: (data) => {
+    onCompleted: data => {
       !!onCompleted && onCompleted(data);
     },
-    onError,
+    onError
   });
 
   return { register, loading, clientPortalId };
@@ -95,7 +96,7 @@ export const useUserEdit = () => {
       setRefetchUser(true);
       toast.success('Хувийн мэдээлэл шинэчлэгдсэн');
     },
-    onError,
+    onError
   });
 
   return { loading, editUser };
@@ -105,7 +106,7 @@ export const useForgotPassword = () => {
   const [forgotPassword, { loading, data }] = useMutation(
     mutations.forgotPassword,
     {
-      onError,
+      onError
     }
   );
 
@@ -118,7 +119,7 @@ export const useChangePassword = () => {
   const [changePassword, { loading, data }] = useMutation(
     mutations.userChangePassword,
     {
-      onError,
+      onError
     }
   );
 
@@ -131,7 +132,7 @@ export const useResetPassword = () => {
   const [resetPassword, { loading, data }] = useMutation(
     mutations.resetPassword,
     {
-      onError,
+      onError
     }
   );
 
@@ -146,13 +147,13 @@ export const useLogout = () => {
     onCompleted() {
       triggerRefetchUser(true);
     },
-    onError,
+    onError
   });
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('refetchToken');
-    sessionStorage.removeItem('fbssls_' + process.env.NEXT_PUBLIC_FACEBOOK_ID);
+    fbLogout();
     logout();
   };
 

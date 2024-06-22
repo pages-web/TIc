@@ -114,11 +114,12 @@ const customerFields = `
 `;
 
 const putResponseFields = `
-  billId
+  totalAmount
+  customerTin
+  customerName
+  id
+  qrData
   lottery
-  qrData 
-  billType
-  amount
 `;
 
 const orderDetail = gql`

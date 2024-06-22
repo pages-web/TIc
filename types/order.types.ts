@@ -71,23 +71,12 @@ export interface IOrderUpdate extends IOrderCreate {
 }
 
 export interface IPutResponse {
-  date?: string;
-  vat?: string;
-  cityTax?: string;
-  registerNo?: string;
-  billId?: string;
+  id?: string;
   lottery?: string;
   qrData?: string;
-  success?: string;
-  lotteryWarningMsg?: string;
-  errorCode?: string;
-  message?: string;
-  getInformation?: string;
-  returnBillId?: string;
-  billType?: IBillType;
-  taxType?: string;
-  stocks?: any;
-  amount?: number;
+  totalAmount?: number;
+  customerTin?: string;
+  customerName?: string;
 }
 export interface IOrderUser {
   _id: string;

@@ -10,7 +10,7 @@ import { Counter, CounterButton, CounterInput } from '../counter/counter';
 import { updateCartAtom } from '@/store/cart.store';
 
 const CartProductCard = ({
-  cartItemAtom,
+  cartItemAtom
 }: {
   cartItemAtom: Atom<OrderItem>;
 }) => {
@@ -26,8 +26,9 @@ const CartProductCard = ({
         {(discountAmount || 0) > 0 && (
           <div className="absolute top-0 left-0 text-white bg-indigo-600 py-1 pl-1.5 pr-2 text-xs font-medium inline-flex items-center">
             <TagIcon className="mr-1 h-3 w-3" />
-            {(discountAmount || 0) / unitPrice + (discountAmount || 0) * 100}%
-            Sale
+            {((discountAmount || 0) / (unitPrice + (discountAmount || 0))) *
+              100}
+            % Хямдрал
           </div>
         )}
       </div>
@@ -48,7 +49,7 @@ const CartProductCard = ({
             />
             <CounterInput
               value={count}
-              onChange={(e) =>
+              onChange={e =>
                 changeCartItem({ _id, count: Number(e.target.value) })
               }
               disabled={loading}
