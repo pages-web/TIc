@@ -7,7 +7,7 @@ export default function NotFound() {
       <h2 className="text-4xl font-semibold">404</h2>
       <p className="text-neutral-500 pt-2 pb-1">Энэ хуудас олдсонгүй</p>
       <Button asChild variant="link">
-        <Link href="/">Эхлэл рүү буцах</Link>
+        <Link href="/">Эхлэл рүү буцах </Link>
       </Button>
     </div>
   );
