@@ -3,7 +3,6 @@ import { gql } from '@apollo/client';
 const createInvoice = gql`
   mutation InvoiceCreate(
     $amount: Float!
-    $selectedPaymentId: String
     $phone: String
     $email: String
     $description: String
@@ -11,13 +10,12 @@ const createInvoice = gql`
     $customerType: String
     $contentType: String
     $contentTypeId: String
-    $couponCode: String
+    $redirectUri: String
+    $paymentIds: [String]
     $data: JSON
-    $couponAmount: Int
   ) {
     invoiceCreate(
       amount: $amount
-      selectedPaymentId: $selectedPaymentId
       phone: $phone
       email: $email
       description: $description
@@ -25,21 +23,53 @@ const createInvoice = gql`
       customerType: $customerType
       contentType: $contentType
       contentTypeId: $contentTypeId
-      couponCode: $couponCode
+      redirectUri: $redirectUri
+      paymentIds: $paymentIds
       data: $data
-      couponAmount: $couponAmount
+    ) {
+      _id
+      invoiceNumber
+      amount
+      remainingAmount
+      phone
+      email
+      description
+      status
+      data
+      contentTypeId
+      transactions {
+        _id
+        paymentId
+        paymentKind
+        status
+        details
+        response
+      }
+    }
+  }
+`;
+
+export const addTransaction = gql`
+  mutation TransactionsAdd(
+    $invoiceId: String!
+    $paymentId: String!
+    $amount: Float!
+    $details: JSON
+  ) {
+    paymentTransactionsAdd(
+      invoiceId: $invoiceId
+      paymentId: $paymentId
+      amount: $amount
+      details: $details
     ) {
       _id
       amount
-      apiResponse
-      data
-      description
-      email
-      errorDescription
-      idOfProvider
+      invoiceId
+      paymentId
       paymentKind
-      phone
       status
+      response
+      details
     }
   }
 `;
@@ -50,6 +80,6 @@ const checkInvoice = gql`
   }
 `;
 
-const mutations = { createInvoice, checkInvoice };
+const mutations = { createInvoice, checkInvoice, addTransaction };
 
 export default mutations;

@@ -17,6 +17,7 @@ import { OrderItem } from '@/types/order.types';
 import { useEffect, useMemo } from 'react';
 import { ORDER_SALE_STATUS, ORDER_STATUSES } from '@/lib/constants';
 import { onError } from '@/lib/utils';
+import { refetchOrderDetailAtom } from '@/store/payment.store';
 
 const useCurrentOrder = () => {
   const { erxesCustomerId } = useAtomValue(currentUserAtom) || {};
@@ -119,40 +120,26 @@ export const useFullOrders = (props?: { variables?: OperationVariables }) => {
 
 export const useOrderDetail = (id: string) => {
   const { erxesCustomerId } = useAtomValue(currentUserAtom) || {};
-  const { data, loading, subscribeToMore, refetch } = useQuery(
-    queries.orderDetail,
-    {
-      variables: {
-        customerId: erxesCustomerId,
-        id
-      },
-      onError
-    }
-  );
+  const [refetchOrder, setRefetchOrder] = useAtom(refetchOrderDetailAtom);
+  const { data, loading, refetch } = useQuery(queries.orderDetail, {
+    variables: {
+      customerId: erxesCustomerId,
+      id
+    },
+    onCompleted() {
+      setRefetchOrder(false);
+    },
+    onError
+  });
 
   const { orderDetail } = data || {};
   const { _id } = orderDetail || {};
 
   useEffect(() => {
-    if (_id) {
-      subscribeToMore({
-        document: subscriptions.ordersOrdered,
-        variables: {
-          token: process.env.NEXT_PUBLIC_POS_TOKEN,
-          statuses: ORDER_STATUSES.ALL,
-          customerId: erxesCustomerId
-        },
-        updateQuery: (prev, { subscriptionData }) => {
-          const { ordersOrdered } = subscriptionData.data || {};
-          if (!ordersOrdered) return prev;
-          if (ordersOrdered._id === _id) {
-            refetch();
-          }
-          return prev;
-        }
-      });
+    if (_id && refetchOrder) {
+      refetch();
     }
-  }, [_id]);
+  }, [_id, refetchOrder]);
 
   return { orderDetail, loading };
 };

@@ -21,7 +21,7 @@ const PrivateRoute = ({ children }: React.PropsWithChildren) => {
   if (currentUser) return children;
 
   return (
-    <div className="flex-auto flex justify-center items-center">
+    <div className="flex-auto flex justify-center items-center py-32">
       <Loader2Icon className="h-6 w-6 animate-spin" />
     </div>
   );

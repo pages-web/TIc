@@ -1,9 +1,10 @@
 import { type OperationVariables, useMutation } from '@apollo/client';
 import { mutations } from '../graphql/payment';
 import { useDetail } from '@/components/order-detail/order-detail';
-import { useAtomValue } from 'jotai';
-import { selectedMethodAtom } from '@/store/payment.store';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { onError } from '@/lib/utils';
+import { configAtom } from '@/store/auth.store';
+import { invoiceDetailAtom } from '@/store/payment.store';
 
 const useCreateInvoice = ({
   appToken,
@@ -17,14 +18,17 @@ const useCreateInvoice = ({
       'erxes-app-token': appToken
     }
   };
-
-  const selectedPaymentId = useAtomValue(selectedMethodAtom);
+  const { paymentIds } = useAtomValue(configAtom) || {};
   const { totalAmount, _id, customer, customerType, number, deliveryInfo } =
     useDetail();
+  const setInvoice = useSetAtom(invoiceDetailAtom);
 
   const [createInvoice, { reset, data, loading }] = useMutation(
     mutations.createInvoice,
     {
+      onCompleted(data) {
+        setInvoice(data?.invoiceCreate);
+      },
       context,
       onError
     }
@@ -40,7 +44,7 @@ const useCreateInvoice = ({
         customerType: customerType || 'customer',
         description: `${number} - ${posName.toUpperCase()} - ${_id}`,
         data: { posToken: process.env.NEXT_PUBLIC_POS_TOKEN },
-        selectedPaymentId: selectedPaymentId,
+        paymentIds,
         phone: deliveryInfo?.phone,
         ...variables
       }

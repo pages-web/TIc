@@ -3,10 +3,12 @@ import { queries } from '../graphql/payment';
 import { IPayment } from '@/types/payment.types';
 import { useAtomValue } from 'jotai';
 import { configAtom } from '@/store/auth.store';
+import { useDetail } from '@/components/order-detail/order-detail';
 
-const usePaymentConfig = () => {
+const usePaymentConfig = (onCompleted?: (data: any) => void) => {
   const config = useAtomValue(configAtom);
   const { erxesAppToken, paymentIds, name } = config || {};
+  const { totalAmount } = useDetail();
 
   const { data, loading } = useQuery(queries.payment, {
     context: {
@@ -15,13 +17,16 @@ const usePaymentConfig = () => {
       }
     },
     nextFetchPolicy: 'cache-first',
-    skip: !erxesAppToken
+    skip: !erxesAppToken,
+    onCompleted
   });
 
   const { payments } = data || {};
 
   const selectedPayments: IPayment[] = (payments || []).filter(
-    (payment: IPayment) => paymentIds?.includes(payment._id)
+    (payment: IPayment) =>
+      paymentIds?.includes(payment._id) &&
+      (totalAmount < 100000 ? payment.kind !== 'storepay' : true)
   );
 
   return {

@@ -23,7 +23,11 @@ function CancelOrder() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" size="lg" className="md:h-12 md:px-8">
+        <Button
+          variant="outline"
+          size="lg"
+          className="md:h-12 px-0 flex-auto md:px-8"
+        >
           Захиалга цуцлах
         </Button>
       </AlertDialogTrigger>

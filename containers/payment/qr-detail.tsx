@@ -29,6 +29,7 @@ const QrDetail = ({
   id: string;
   urls: { name: string; logo: string; link: string }[];
 }) => {
+  console.log(qrCode);
   return (
     <div className="relative">
       <div className="max-h-[60vh] overflow-auto pb-14">
@@ -56,6 +57,7 @@ const QrDetail = ({
                 variant={'ghost'}
                 size="sm"
                 asChild
+                key={url.name}
               >
                 <Link href={url.link}>
                   <Image

@@ -41,7 +41,7 @@ const PaymentMethods = () => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent>
-        <div className="container py-4">
+        <div className="container pt-4 pb-12">
           <Payment />
         </div>
       </DrawerContent>

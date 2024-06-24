@@ -44,7 +44,9 @@ const PaymentType = ({
             width={36}
           />
           <div className="flex-auto text-left">
-            <div className={'font-medium capitalize text-black'}>{kind}</div>
+            <div className={'font-medium capitalize text-black'}>
+              {kind === 'qpayQuickqr' ? 'qpay' : kind}
+            </div>
           </div>
           <label
             className={cn('absolute inset-0 rounded-2xl cursor-pointer')}

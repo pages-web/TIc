@@ -38,7 +38,7 @@ const OrderHeader = () => {
         )}
       </CardContent>
       <Separator />
-      <CardFooter className="justify-between pt-4 md:py-4">
+      <CardFooter className="justify-between pt-4 md:py-4 gap-2">
         <CancelOrder />
         {!paidDate ? <BuyButton /> : <GetEbarimt />}
       </CardFooter>
