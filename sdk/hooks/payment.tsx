@@ -19,7 +19,7 @@ const useCreateInvoice = ({
     }
   };
   const { paymentIds } = useAtomValue(configAtom) || {};
-  const { totalAmount, _id, customer, customerType, number, deliveryInfo } =
+  const { totalAmount, _id, customerId, customerType, number, deliveryInfo } =
     useDetail();
   const setInvoice = useSetAtom(invoiceDetailAtom);
 
@@ -40,7 +40,7 @@ const useCreateInvoice = ({
         amount: totalAmount,
         contentType: 'pos:orders',
         contentTypeId: _id,
-        customerId: customer?._id || 'empty',
+        customerId: customerId || 'empty',
         customerType: customerType || 'customer',
         description: `${number} - ${posName.toUpperCase()} - ${_id}`,
         data: { posToken: process.env.NEXT_PUBLIC_POS_TOKEN },
