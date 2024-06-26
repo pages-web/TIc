@@ -16,10 +16,10 @@ const PaymentMethods = () => {
   const {
     handleCreateInvoice,
     loading: creatingInvoice,
-    data
+    data,
   } = useCreateInvoice({
     appToken: erxesAppToken || '',
-    posName: erxesAppToken || ''
+    posName: name || '',
   });
   const { loading, payments } = usePaymentConfig(
     () => _id !== contentTypeId && handleCreateInvoice()
@@ -42,7 +42,7 @@ const PaymentMethods = () => {
       ) : (
         <RadioGroup
           value={selectedPayment}
-          onValueChange={value => setSelectedPayment(value)}
+          onValueChange={(value) => setSelectedPayment(value)}
         >
           <div className="space-y-3">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
