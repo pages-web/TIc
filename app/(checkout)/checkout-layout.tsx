@@ -8,14 +8,14 @@ const CheckoutLayout = ({
   children,
   title,
   backTitle,
-  backUrl
+  backUrl,
 }: React.PropsWithChildren & {
   title: string;
   backTitle: string;
   backUrl: string;
 }) => {
   return (
-    <div className="container pb-20">
+    <div className="container pb-20 flex-auto">
       <PrivateRoute>
         <CheckoutRoute>
           <div className="flex justify-between md:mt-8 my-6 md:mb-10 items-center">

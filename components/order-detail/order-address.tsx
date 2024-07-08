@@ -7,7 +7,7 @@ const OrderAddress = () => {
   const { phone, city, district, street, detail, email } = deliveryInfo || {};
 
   return (
-    <Card>
+    <Card className="mb-10">
       <CardHeader className="md:py-4">
         <CardTitle className="text-lg font-semibold">
           Хүргэлтийн мэдээлэл

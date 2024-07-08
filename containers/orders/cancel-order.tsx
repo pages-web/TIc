@@ -8,7 +8,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { LoadingIcon } from '@/components/ui/loading';
@@ -26,9 +26,9 @@ function CancelOrder() {
         <Button
           variant="outline"
           size="lg"
-          className="md:h-12 px-0 flex-auto md:px-8"
+          className="md:h-12 px-0 flex-auto md:flex-none md:px-8"
         >
-          Захиалга цуцлах
+          ˝ Захиалга цуцлах
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -51,7 +51,7 @@ function CancelOrder() {
                     `${number} дугаартай захиалга амжилттай цуцлагдлаа`
                   );
                   router.replace('/profile/orders?refetch=true');
-                }
+                },
               })
             }
             disabled={loading}
