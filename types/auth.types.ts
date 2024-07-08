@@ -10,6 +10,7 @@ export interface Customer {
   password?: string;
   isEmailVerified?: boolean;
   isPhoneVerified?: boolean;
+  avatar?: string;
 }
 
 export interface IConfig {
