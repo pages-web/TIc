@@ -4,13 +4,13 @@ import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import {
   currentUserAtom,
   loadingUserAtom,
-  refetchCurrentUserAtom
+  refetchCurrentUserAtom,
 } from '@/store/auth.store';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 export const useCurrentUser = (onCompleted?: (data: any) => void) => {
-  const setCurrentUser = useSetAtom(currentUserAtom);
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
   const [loading, setLoading] = useAtom(loadingUserAtom);
   const [refetchUser, setRefetchUser] = useAtom(refetchCurrentUserAtom);
 
@@ -25,7 +25,7 @@ export const useCurrentUser = (onCompleted?: (data: any) => void) => {
         return setCurrentUser(null);
       }
       toast.error(error.message);
-    }
+    },
   });
 
   useEffect(() => {
@@ -44,19 +44,16 @@ export const useCurrentUser = (onCompleted?: (data: any) => void) => {
     }
   }, [refetchUser]);
 
-  const { clientPortalCurrentUser: currentUser } = data || {};
-
   return { currentUser, loading, setLoading };
 };
 
 export const useUserDetail = () => {
   const refetchUser = useAtomValue(refetchCurrentUserAtom);
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
-
   const { loading, refetch } = useQuery(queries.userDetail, {
     onCompleted({ clientPortalCurrentUser }) {
       setCurrentUser({ ...currentUser, ...clientPortalCurrentUser });
-    }
+    },
   });
 
   useEffect(() => {
@@ -64,6 +61,5 @@ export const useUserDetail = () => {
       refetch();
     }
   }, [refetchUser]);
-
   return { loading };
 };
