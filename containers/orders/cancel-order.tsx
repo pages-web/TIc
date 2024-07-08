@@ -28,7 +28,7 @@ function CancelOrder() {
           size="lg"
           className="md:h-12 px-0 flex-auto md:flex-none md:px-8"
         >
-          ˝ Захиалга цуцлах
+          Захиалга цуцлах
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
