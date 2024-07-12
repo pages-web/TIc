@@ -6,6 +6,7 @@ import AddToCart from './AddToCart.client';
 import { cn } from '@/lib/utils';
 import Remainder from './remainder.client';
 import ProductReview from './productReview';
+import ChooseProduct from './chooseProduct';
 
 const PurchaseCard = ({
   name,
@@ -13,8 +14,16 @@ const PurchaseCard = ({
   _id,
   remainder,
   attachment,
+  hasSimilarity,
 }: IProductDetail) => {
-  const product = { name, unitPrice, _id, remainder, attachment };
+  const product = {
+    name,
+    unitPrice,
+    _id,
+    remainder,
+    attachment,
+    hasSimilarity,
+  };
   return (
     <Card className="md:sticky md:top-28">
       <CardHeader>
@@ -42,6 +51,7 @@ const PurchaseCard = ({
         </div>
         <ProductReview productId={product._id} />
         <Remainder remainder={remainder} />
+        <ChooseProduct {...product} />
       </CardHeader>
       <CardContent className="md:py-0">
         <Separator />

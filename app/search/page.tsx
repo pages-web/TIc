@@ -26,7 +26,12 @@ const Search = () => {
       () =>
         !!search &&
         getProducts({
-          variables: { searchValue: search, perPage: 20, isKiosk: true }
+          variables: {
+            searchValue: search,
+            perPage: 20,
+            isKiosk: true,
+            hasSimilarity: 'config',
+          },
         }),
       500
     );
@@ -49,7 +54,7 @@ const Search = () => {
             placeholder="Хайлтын утгаа оруулана уу"
             ref={inputRef}
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <SearchIcon className="absolute top-1/2 left-2 -translate-y-1/2 h-5 w-5 text-neutral-600" />
         </div>

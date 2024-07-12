@@ -8,23 +8,25 @@ import { Separator } from '@/components/ui/separator';
 import {
   getBreadcrumbs,
   getCategories,
-  getProductDetail
+  getProductDetail,
+  getProductSimilarities,
 } from '@/sdk/queries/products';
 import { IPageProps } from '@/types';
 import { IAttachment } from '@/types';
 import { Metadata } from 'next/types';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
+import { getActiveProduct } from '@/lib/product';
 
 export const revalidate = 300;
 
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
   const { product } = await getProductDetail({
-    variables: { _id: params.slug }
+    variables: { _id: params.slug },
   });
 
   if (!product) return notFound();
@@ -39,8 +41,8 @@ export async function generateMetadata({
       follow: true,
       googleBot: {
         index: true,
-        follow: true
-      }
+        follow: true,
+      },
     },
     openGraph: attachment?.url
       ? {
@@ -49,21 +51,21 @@ export async function generateMetadata({
               url: attachment?.url,
               width: 400,
               height: 400,
-              alt: name
-            }
-          ]
+              alt: name,
+            },
+          ],
         }
-      : null
+      : null,
   };
 }
 
-const Product = async ({ params }: IPageProps) => {
-  const { product } = await getProductDetail({
-    variables: { _id: params.slug }
+const Product = async ({ params, searchParams }: IPageProps) => {
+  const { products } = await getProductSimilarities({
+    variables: { id: params.slug, groupedSimilarity: 'config' },
   });
 
-  if (!product) return notFound();
-
+  if (!products.length) return notFound();
+  const { product } = getActiveProduct({ products, searchParams }) || {};
   const {
     attachment,
     attachmentMore,
@@ -72,8 +74,8 @@ const Product = async ({ params }: IPageProps) => {
     category,
     name,
     remainder,
-    unitPrice
-  } = product || {};
+    unitPrice,
+  } = product;
 
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -88,15 +90,15 @@ const Product = async ({ params }: IPageProps) => {
         : 'https://schema.org/OutOfStock',
       priceCurrency: 'MNT',
       highPrice: unitPrice,
-      lowPrice: unitPrice
-    }
+      lowPrice: unitPrice,
+    },
   };
 
   const { categories } = await getCategories();
 
   const breadcrumbs: Breadcrumb[] = [
     { name: 'Эхлэл', link: '/' },
-    { name: 'Дэлгүүр', link: '/category' }
+    { name: 'Дэлгүүр', link: '/category' },
   ];
 
   const dynamicBreadcrumbs = getBreadcrumbs(category?.order || '', categories);
@@ -106,7 +108,7 @@ const Product = async ({ params }: IPageProps) => {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd)
+          __html: JSON.stringify(productJsonLd),
         }}
       />
       <BreadcrumbsLayout
@@ -119,13 +121,13 @@ const Product = async ({ params }: IPageProps) => {
           style={{
             gridTemplateAreas: `"left-top right"
           "left-bottom right"`,
-            gridTemplateColumns: `minmax(50%, 500px) auto`
+            gridTemplateColumns: `minmax(50%, 500px) auto`,
           }}
         >
           <section className="md:h-full " style={{ gridArea: `left-top` }}>
             <Gallery
               attachments={(attachmentMore || []).concat([
-                attachment as IAttachment
+                attachment as IAttachment,
               ])}
             />
           </section>

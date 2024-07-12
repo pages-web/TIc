@@ -4,7 +4,7 @@ import { BreadcrumbsLayout } from '../breadcrumbs-layout';
 import {
   getProducts,
   getBreadcrumbs,
-  getCategories
+  getCategories,
 } from '@/sdk/queries/products';
 import { ICategory } from '@/types/products.types';
 import { PER_PAGE } from '@/lib/constants';
@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: config.name + ' - Бүтээгдэхүүнүүд',
     openGraph: {
-      title: config.name + ' - Бүтээгдэхүүнүүд'
-    }
+      title: config.name + ' - Бүтээгдэхүүнүүд',
+    },
   };
 }
 
@@ -31,7 +31,9 @@ const Category = async ({ searchParams }: IPageProps) => {
   const { order, page, q, sort } = searchParams;
   const { categories, getParent, primaryCategories } = await getCategories();
 
-  const activeCategory = categories.find(category => category.order === order);
+  const activeCategory = categories.find(
+    (category) => category.order === order
+  );
 
   const { products, count } = await getProducts({
     variables: {
@@ -40,19 +42,20 @@ const Category = async ({ searchParams }: IPageProps) => {
       perPage: PER_PAGE,
       searchValue: q,
       isKiosk: true,
-      ...getSort(sort)
-    }
+      groupedSimilarity: 'config',
+      ...getSort(sort),
+    },
   });
 
   const parentCategory = activeCategory && getParent(activeCategory.parentId);
 
   const childrenCategories =
     activeCategory &&
-    categories.filter(category => category.parentId === activeCategory._id);
+    categories.filter((category) => category.parentId === activeCategory._id);
 
   const breadcrumbs = [
     { name: 'Эхлэл', link: '/' },
-    { name: 'Дэлгүүр', link: '/category' as LinkProps['href'] }
+    { name: 'Дэлгүүр', link: '/category' as LinkProps['href'] },
   ];
 
   const dynamicBreadcrumbs =
@@ -76,7 +79,7 @@ const Category = async ({ searchParams }: IPageProps) => {
                 activeCategory
                   ? [
                       { ...(parentCategory as ICategory), parent: true },
-                      ...(childrenCategories || [])
+                      ...(childrenCategories || []),
                     ]
                   : primaryCategories
               }

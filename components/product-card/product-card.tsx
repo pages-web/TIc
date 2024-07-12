@@ -9,7 +9,7 @@ const ProductCard = ({
   className,
   ...product
 }: IProduct & { className?: string }) => {
-  const { name, attachment, unitPrice, _id } = product;
+  const { name, attachment, unitPrice, _id, hasSimilarity } = product;
   return (
     <div
       className={cn(
@@ -46,7 +46,7 @@ const ProductCard = ({
         >
           <Price amount={unitPrice} />
         </span>
-        <ProductCardAdd {...product} />
+        {!hasSimilarity && <ProductCardAdd {...product} />}
       </div>
     </div>
   );

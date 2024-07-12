@@ -12,6 +12,12 @@ export interface Group {
   title: string;
 }
 
+export interface ProductField extends Group {
+  variants: string[];
+}
+
+export type ProductFields = { [key: string]: ProductField };
+
 export interface IProductDetail extends IProduct {
   attachmentMore?: IAttachment[];
   category?: ICategory;

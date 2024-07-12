@@ -1,12 +1,13 @@
-'use client';
-
-import { checkRemainderAtom } from '@/store/auth.store';
 import { useAtomValue } from 'jotai';
 import { Badge } from '@/components/ui/badge';
+import { getConfig } from '@/sdk/queries/auth';
 
-const Remainder = ({ remainder }: { remainder?: number | null }) => {
-  const checkRemainder = useAtomValue(checkRemainderAtom);
-  if (!checkRemainder) return <></>;
+const Remainder = async ({ remainder }: { remainder?: number | null }) => {
+  const { config } = await getConfig();
+  const { isCheckRemainder } = config;
+
+  if (!isCheckRemainder) return null;
+
   return (
     <div className="flex items-center pt-2">
       {remainder ? (

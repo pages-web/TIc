@@ -5,21 +5,27 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
-  CarouselNext
+  CarouselNext,
 } from '../ui/carousel';
 import { IProduct } from '@/types/product.types';
+import { cn } from '@/lib/utils';
 
 const RecommendedProducts = async ({
   categoryId,
-  productId
+  productId,
 }: {
   categoryId?: string;
   productId?: string;
 }) => {
   const { products } = await getProducts({
-    variables: { categoryId, perPage: 12, isKiosk: true }
+    variables: {
+      categoryId,
+      perPage: 12,
+      isKiosk: true,
+      groupedSimilarity: 'config',
+    },
   });
-  const exceptCurrent = products.filter(product => product._id !== productId);
+  const exceptCurrent = products.filter((product) => product._id !== productId);
 
   if (!exceptCurrent.length) return null;
 
@@ -31,7 +37,10 @@ const RecommendedProducts = async ({
             className="basis-1/2 md:basis-1/3 xl:basis-1/4 2xl:basis-1/5"
             key={product._id}
           >
-            <ProductCard {...product} />
+            <ProductCard
+              {...product}
+              className={cn(product.hasSimilarity && 'pb-8')}
+            />
           </CarouselItem>
         ))}
       </CarouselContent>

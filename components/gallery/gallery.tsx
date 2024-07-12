@@ -5,7 +5,7 @@ import {
   Carousel,
   CarouselApi,
   CarouselContent,
-  CarouselItem
+  CarouselItem,
 } from '../ui/carousel';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -39,10 +39,13 @@ const Gallery = ({ attachments = [] }: { attachments: IAttachment[] }) => {
 
   return (
     <div className="flex flex-row-reverse gap-6 justify-stretch">
-      <Carousel className="flex-1" setApi={ap => setApi(ap)}>
+      <Carousel className="flex-1" setApi={(ap) => setApi(ap)}>
         <CarouselContent className="ml-0">
-          {attachments.map(attachment => (
-            <CarouselItem className="relative aspect-square pl-0">
+          {attachments.map((attachment) => (
+            <CarouselItem
+              className="relative aspect-square pl-0"
+              key={attachment?.url}
+            >
               <Image
                 src={attachment?.url || ''}
                 height={1024}
@@ -57,9 +60,12 @@ const Gallery = ({ attachments = [] }: { attachments: IAttachment[] }) => {
       </Carousel>
       <Carousel
         orientation="vertical"
-        className="w-28 hidden md:block"
+        className={cn(
+          'w-28 hidden md:block',
+          attachments.length === 1 && 'md:hidden'
+        )}
         opts={{ containScroll: 'keepSnaps', dragFree: true }}
-        setApi={ap => setThumbApi(ap)}
+        setApi={(ap) => setThumbApi(ap)}
       >
         <CarouselContent className="basis-[5rem] xl:max-h-[600px] mt-0">
           {attachments.map((item, index) => (
@@ -70,6 +76,7 @@ const Gallery = ({ attachments = [] }: { attachments: IAttachment[] }) => {
                   ? 'border-primary'
                   : 'border-transparent'
               )}
+              key={item?.url}
               onClick={() => onThumbClick(index)}
             >
               <Image

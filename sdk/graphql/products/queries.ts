@@ -74,10 +74,22 @@ const productSimilarities = gql`
     poscProductSimilarities(_id: $id, groupedSimilarity: $groupedSimilarity) {
       products {
         _id
-        description
-        unitPrice
         name
+        description
+        code
+        type
+        createdAt
+        unitPrice
+        remainder
+        category {
+          order
+          name
+          _id
+        }
         attachment {
+          url
+        }
+        attachmentMore {
           url
         }
         customFieldsData
@@ -108,33 +120,6 @@ const productsCount = gql`
   }
 `;
 
-const getPriceInfo = gql`
-  query getPriceInfo($productId: String!) {
-    getPriceInfo(productId: $productId)
-  }
-`;
-
-const getInitialCategory = gql`
-  query InitialCategory($_id: String) {
-    poscProductCategoryDetail(_id: $_id) {
-      _id
-      name
-    }
-  }
-`;
-
-const getKioskCategory = gql`
-  query InitialCategory($_id: String) {
-    poscProductCategoryDetail(_id: $_id) {
-      _id
-      name
-      attachment {
-        url
-      }
-    }
-  }
-`;
-
 const productDetail = gql`
   query ProductDetail($_id: String) {
     poscProductDetail(_id: $_id) {
@@ -146,6 +131,7 @@ const productDetail = gql`
       createdAt
       unitPrice
       remainder
+      hasSimilarity
       category {
         order
         name
@@ -178,6 +164,6 @@ const queries = {
   productSimilarities,
   productDetail,
   productsMeta,
-  productReview
+  productReview,
 };
 export default queries;
