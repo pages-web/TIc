@@ -66,6 +66,8 @@ const Product = async ({ params, searchParams }: IPageProps) => {
 
   if (!products.length) return notFound();
   const { product } = getActiveProduct({ products, searchParams }) || {};
+
+  const productIds = products.map((prod) => prod._id);
   const {
     attachment,
     attachmentMore,
@@ -139,7 +141,11 @@ const Product = async ({ params, searchParams }: IPageProps) => {
           </section>
           <section className="md:mt-8" style={{ gridArea: `left-bottom` }}>
             <Separator />
-            <ProductAccordion description={description || 'empty'} _id={_id} />
+            <ProductAccordion
+              activeId={_id}
+              description={description || 'empty'}
+              ids={productIds}
+            />
           </section>
         </div>
         <div className="mt-28 mb-20">
