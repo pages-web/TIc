@@ -1,6 +1,7 @@
 import Price from '@/components/price/price';
 import { Badge } from '@/components/ui/badge';
 import Image from '@/components/ui/image';
+import { getProductNameCode } from '@/lib/utils';
 import { OrderItem } from '@/types/order.types';
 
 const OrderProduct = ({
@@ -10,8 +11,7 @@ const OrderProduct = ({
   count,
   unitPrice,
 }: OrderItem) => {
-  const name = productName?.split('-')[1];
-  const code = productName?.split('-')[0];
+  const { code, name } = getProductNameCode(productName);
   return (
     <div className="overflow-hidden flex p-2 border-b last-of-type:border-b-0 gap-2 lg:gap-0">
       <Image

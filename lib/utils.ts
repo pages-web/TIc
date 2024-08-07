@@ -155,7 +155,7 @@ export function getSimilarColorWithOpacity(
 export const getProductNameCode = (productName?: string) => {
   const arr = (productName || '').split(' - ');
   return {
-    name: arr.length === 2 ? arr[1] : productName,
+    name: arr.length >= 2 ? arr.slice(1).join('') : productName,
     code: arr.length === 2 ? arr[0] : '',
   };
 };
