@@ -56,6 +56,7 @@ export const fullOrders = gql`
     $perPage: Int
     $sortField: String
     $sortDirection: Int
+    $saleStatus: String
   ) {
     fullOrders(
       customerId: $customerId
@@ -63,6 +64,7 @@ export const fullOrders = gql`
       perPage: $perPage
       sortField: $sortField
       sortDirection: $sortDirection
+      saleStatus: $saleStatus
     ) {
       _id
       createdAt
@@ -188,7 +190,7 @@ const queries = {
   fullOrders,
   orderDetail,
   invoices,
-  addresses
+  addresses,
 };
 
 export default queries;

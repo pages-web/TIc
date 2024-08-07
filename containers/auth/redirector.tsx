@@ -14,7 +14,7 @@ const Redirector = () => {
     if (user) {
       router.push(from ? from : '/');
     }
-  }, []);
+  }, [user?._id]);
 
   return <></>;
 };
