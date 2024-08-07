@@ -17,18 +17,18 @@ const items = [
   {
     name: 'New',
     image: '/images/new-card.png',
-    order: '/category'
+    order: '/category',
   },
   {
     name: 'Men',
     image: '/images/men-card.png',
-    order: '/category'
+    order: '/category',
   },
   {
     name: 'Women',
     image: '/images/women-card.png',
-    order: '/category'
-  }
+    order: '/category',
+  },
 ];
 
 export async function CategoryCard({ ...attributes }: CategoryCardProps) {
@@ -38,9 +38,9 @@ export async function CategoryCard({ ...attributes }: CategoryCardProps) {
 
   return (
     <>
-      <Heading title="Онцлох ангилалууд" className="md:mt-16 md:mb-8" />
+      <Heading title="Онцлох ангилалууд" className="lg:mt-16 lg:mb-8" />
       <div
-        className="container mb-10 md:mb-16 flex flex-nowrap md:flex-wrap md:justify-center overflow-x-scroll no-scrollbar"
+        className="container mb-10 lg:mb-16 flex flex-nowrap lg:flex-wrap lg:justify-center overflow-x-scroll no-scrollbar"
         {...attributes}
       >
         {(config.initialCategoryIds || []).map((_id: string) => (

@@ -6,7 +6,7 @@ const GridBanner = async () => {
   const { articles } = await getKbArticlesByCode('big-banner');
   if (!articles.length) return null;
   return (
-    <div className="container grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-10">
+    <div className="container grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4 mb-10">
       <Suspense>
         <BigBanners />
         <SmallBanners />

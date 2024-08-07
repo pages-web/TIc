@@ -13,14 +13,14 @@ export type CategoryTreeItemProps =
 export function CategoryTreeItem({
   parent,
   name,
-  order
+  order,
 }: ICategory & { parent?: boolean }): JSX.Element {
   const sort = useSearchParams().get('sort');
 
   return (
     <Button
       variant={'ghost'}
-      className="md:py-1.5 w-full font-normal"
+      className="lg:py-1.5 w-full font-normal"
       asChild
       size="sm"
     >
@@ -29,7 +29,7 @@ export function CategoryTreeItem({
           className={cn('flex gap-2 items-center w-full', !parent && 'pl-6')}
         >
           {parent && <ArrowLeftIcon className="text-neutral-600 h-4 w-4" />}
-          <span className="text-base md:text-sm capitalize flex items-center">
+          <span className="text-base lg:text-sm capitalize flex items-center">
             {name || 'Дэлгүүр'}
           </span>
         </span>
@@ -40,7 +40,7 @@ export function CategoryTreeItem({
 
 {
   /* {Number(count) > -1 && (
-            <span className="md:text-sm font-normal text-neutral-600">
+            <span className="lg:text-sm font-normal text-neutral-600">
               ({count})
             </span>
           )} */

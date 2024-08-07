@@ -5,20 +5,20 @@ import { cn } from '@/lib/utils';
 
 const CategoryItem = async ({ id, length }: { id: string; length: number }) => {
   const { categories } = await getCategories();
-  const category = categories.find(cat => cat._id === id);
+  const category = categories.find((cat) => cat._id === id);
 
   if (!category) return null;
 
   const { order, attachment, name } = category;
 
   return (
-    <div className="mr-2 md:mr-6 group">
+    <div className="mr-2 lg:mr-6 group">
       <Link
         className="w-full h-full z-[1] focus-visible:outline focus-visible:outline-offset-2 focus-visible:rounded-md"
         href={`/category?order=${order}`}
         aria-label={name}
       >
-        <div className="relative h-40 md:h-48 w-40 md:w-48">
+        <div className="relative h-40 lg:h-48 w-40 lg:w-48">
           <Image
             src={attachment?.url || ''}
             alt={name}

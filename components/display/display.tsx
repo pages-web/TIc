@@ -13,8 +13,8 @@ const items = [
     reverse: true,
     backgroundColor: 'bg-secondary-200',
     buttonLink: '/category',
-    titleClass: 'md:typography-headline-2',
-    subtitleClass: 'md:typography-headline-6'
+    titleClass: 'lg:typography-headline-2',
+    subtitleClass: 'lg:typography-headline-6',
   },
   {
     image: '/images/display-2.png',
@@ -24,7 +24,7 @@ const items = [
     buttonText: 'Discover now',
     reverse: true,
     backgroundColor: 'bg-negative-200',
-    buttonLink: '/category'
+    buttonLink: '/category',
   },
   {
     image: '/images/display-3.png',
@@ -34,8 +34,8 @@ const items = [
     buttonText: 'Discover now',
     reverse: true,
     backgroundColor: 'bg-warning-200',
-    buttonLink: '/category'
-  }
+    buttonLink: '/category',
+  },
 ];
 
 export type DisplayProps = {
@@ -53,7 +53,7 @@ export type DisplayProps = {
 const Display = ({ ...attributes }: DisplayProps) => {
   return (
     <div
-      className="flex flex-col md:flex-row flex-wrap gap-6 container mb-10"
+      className="flex flex-col lg:flex-row flex-wrap gap-6 container mb-10"
       data-testid="display"
       {...attributes}
     >
@@ -66,19 +66,19 @@ const Display = ({ ...attributes }: DisplayProps) => {
           buttonText,
           reverse,
           titleClass,
-          subtitleClass
+          subtitleClass,
         }) => (
           <div
             key={title}
-            className="relative flex md:[&:not(:first-of-type)]:flex-1 md:first-of-type:w-full first:bg-indigo-200 last:bg-rose-200 even:bg-amber-200 rounded-2xl overflow-hidden"
+            className="relative flex lg:[&:not(:first-of-type)]:flex-1 lg:first-of-type:w-full first:bg-indigo-200 last:bg-rose-200 even:bg-amber-200 rounded-2xl overflow-hidden"
           >
             <div
               className={cn('flex overflow-hidden grow flex-col', {
                 'flex-col-reverse': reverse,
-                'md:flex-row-reverse': reverse
+                'lg:flex-row-reverse': reverse,
               })}
             >
-              <div className="flex flex-1 flex-col justify-center items-center md:items-start p-6 lg:p-10 max-w-1/2">
+              <div className="flex flex-1 flex-col justify-center items-center lg:items-start p-6 lg:p-10 max-w-1/2">
                 <p
                   className={cn(
                     'uppercase text-xs block font-bold tracking-widest',
@@ -90,7 +90,7 @@ const Display = ({ ...attributes }: DisplayProps) => {
                 <h2 className={cn('mb-4 mt-2 font-bold text-2xl', titleClass)}>
                   {title}
                 </h2>
-                <p className="text-base block text-center md:text-left mb-4">
+                <p className="text-base block text-center lg:text-left mb-4">
                   {description}
                 </p>
                 <Button className="bg-primary" asChild>
@@ -100,7 +100,7 @@ const Display = ({ ...attributes }: DisplayProps) => {
               <Image
                 src={image}
                 alt={title}
-                className="w-full md:w-1/2 md:max-w-lg self-end object-contain flex-1"
+                className="w-full lg:w-1/2 lg:max-w-lg self-end object-contain flex-1"
                 height={400}
                 width={400}
               />

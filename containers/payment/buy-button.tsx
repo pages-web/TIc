@@ -7,7 +7,7 @@ import {
   invoiceDetailAtom,
   openDetailAtom,
   openMethodsAtom,
-  selectedMethodAtom
+  selectedMethodAtom,
 } from '@/store/payment.store';
 import { useSubscription } from '@apollo/client';
 import subscriptions from '@/sdk/graphql/payment/subscriptions';
@@ -33,12 +33,12 @@ const BuyButton = () => {
       if (invoiceUpdated?.status === 'paid') {
         onCompleted();
       }
-    }
+    },
   });
 
   return (
     <>
-      <Button size="lg" className="md:h-12 md:px-8" onClick={handlePay}>
+      <Button size="lg" className="lg:h-12 lg:px-8" onClick={handlePay}>
         Төлбөр төлөх
       </Button>
       <PaymentMethods />

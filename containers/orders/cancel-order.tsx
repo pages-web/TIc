@@ -26,7 +26,7 @@ function CancelOrder() {
         <Button
           variant="outline"
           size="lg"
-          className="md:h-12 px-0 flex-auto md:flex-none md:px-8"
+          className="lg:h-12 px-0 flex-auto lg:flex-none lg:px-8"
         >
           Захиалга цуцлах
         </Button>

@@ -10,7 +10,7 @@ import { Counter, CounterButton, CounterInput } from '../counter/counter';
 import { updateCartAtom } from '@/store/cart.store';
 
 const CartProductCard = ({
-  cartItemAtom
+  cartItemAtom,
 }: {
   cartItemAtom: Atom<OrderItem>;
 }) => {
@@ -18,8 +18,8 @@ const CartProductCard = ({
     useAtomValue(cartItemAtom);
   const [loading, changeCartItem] = useAtom(updateCartAtom);
   return (
-    <div className="relative flex first:border-t border-b border-neutral-200 hover:shadow-lg min-w-[320px] py-4 md:px-4 last:mb-0 last:border-b-0 md:last:border-b">
-      <div className="relative overflow-hidden rounded-md w-[100px] md:w-[176px]">
+    <div className="relative flex first:border-t border-b border-neutral-200 lg:hover:shadow-lg min-w-[320px] py-4 lg:px-4 last:mb-0 last:border-b-0 lg:last:border-b">
+      <div className="relative overflow-hidden rounded-md w-[100px] lg:w-[176px]">
         <Link href={`/product/${_id}`}>
           <Image src={productImgUrl} alt="" width={300} height={300} />
         </Link>
@@ -36,13 +36,13 @@ const CartProductCard = ({
       </div>
       <div className="flex flex-col pl-4 min-w-[180px] flex-1 ">
         <Button
-          className="text-lg justify-start px-0 mb-2 md:mb-0"
+          className="text-base xl:text-lg justify-start px-0 mb-2 lg:mb-0 whitespace-normal h-auto"
           asChild
           variant="link"
         >
           <Link href={`/product/${_id}`}>{productName}</Link>
         </Button>
-        <div className="items-center md:mt-auto flex flex-wrap md:flex-nowrap md:justify-between md:w-full gap-2">
+        <div className="items-center lg:mt-auto flex flex-wrap lg:flex-nowrap lg:justify-between lg:w-full gap-2">
           <Counter>
             <CounterButton
               disabled={loading}
@@ -51,7 +51,7 @@ const CartProductCard = ({
             />
             <CounterInput
               value={count}
-              onChange={e =>
+              onChange={(e) =>
                 changeCartItem({ _id, count: Number(e.target.value) })
               }
               disabled={loading}
@@ -70,7 +70,7 @@ const CartProductCard = ({
           >
             Хасах
           </Button>
-          <span className="font-bold md:ml-auto md:order-1 text-sm md:text-lg">
+          <span className="font-bold lg:ml-auto lg:order-1 text-sm lg:text-lg">
             <Price amount={unitPrice} />
           </span>
         </div>

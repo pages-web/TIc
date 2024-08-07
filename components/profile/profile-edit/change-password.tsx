@@ -7,7 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
 import { currentUserAtom } from '@/store/auth.store';
@@ -23,12 +23,12 @@ import { LoadingIcon } from '@/components/ui/loading';
 const formSchema = z.object({
   currentPassword: z.string().min(1, 'Password is required'),
   newPassword: passwordZod,
-  verifyPassword: passwordZod
+  verifyPassword: passwordZod,
 });
 
 const ChangePassword = () => {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
   });
   const { changePassword, loading, clientPortalId } = useChangePassword();
 
@@ -43,14 +43,14 @@ const ChangePassword = () => {
       onCompleted() {
         toast.success('Нууц үг солигдлоо');
         form.reset();
-      }
+      },
     });
   }
 
   return (
     <Form {...form}>
       <form
-        className="space-y-6 md:grid grid-cols-2 gap-x-6"
+        className="space-y-6 lg:grid grid-cols-2 gap-x-6"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField

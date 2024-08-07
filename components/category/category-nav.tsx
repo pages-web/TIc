@@ -7,7 +7,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle
+  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { ChevronRight, ChevronRightIcon } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -17,7 +17,7 @@ import { useState } from 'react';
 
 export function CategoryNav({
   categories,
-  primaryCategories
+  primaryCategories,
 }: {
   categories: ICategory[];
   primaryCategories: ICategory[];
@@ -25,7 +25,7 @@ export function CategoryNav({
   const [activeCat, setActiveCat] = useState<string | undefined>();
 
   const getChildren = (parentId: string) =>
-    categories.filter(c => c.parentId === parentId);
+    categories.filter((c) => c.parentId === parentId);
 
   const onLinkClick = () => setActiveCat(undefined);
 
@@ -61,7 +61,7 @@ export function CategoryNav({
                   {name}
                 </Link>
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="md:w-full">
+              <NavigationMenuContent className="lg:w-full">
                 <div className="p-4 text-sm pb-8">
                   <LinkItem
                     order={order}
@@ -71,10 +71,10 @@ export function CategoryNav({
                     {name} <ChevronRight className="h-4 w-4 ml-1" />
                   </LinkItem>
                   <ul className="grid grid-cols-3 xl:grid-cols-4 w-full gap-3">
-                    {childrenCats.map(cat => (
+                    {childrenCats.map((cat) => (
                       <li key={cat._id}>
                         <h4 className="font-medium py-1 px-4">{cat.name}</h4>
-                        {getChildren(cat._id).map(c => (
+                        {getChildren(cat._id).map((c) => (
                           <LinkItem
                             className="flex h-6 py-0 font-normal justify-start"
                             key={c._id}
@@ -109,7 +109,7 @@ const LinkItem = ({
   onClick,
   children,
   order,
-  className
+  className,
 }: React.PropsWithChildren & {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   order: string;

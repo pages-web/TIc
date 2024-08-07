@@ -14,7 +14,7 @@ const Footer = async () => {
     <footer>
       {!!branchDetail && (
         <div className="bg-neutral-100">
-          <div className="container py-6 grid md:grid-cols-4">
+          <div className="container py-6 grid lg:grid-cols-4">
             <Col title="Бидний тухай">
               <FooterLink href="/about">Бидний тухай</FooterLink>
             </Col>
@@ -69,7 +69,7 @@ const Footer = async () => {
           </div>
         </div>
       )}
-      <div className="bg-primary text-neutral-300 py-4 text-sm pb-32 md:py-4">
+      <div className="bg-primary text-neutral-300 py-4 text-sm pb-32 lg:py-4">
         <div className="container flex items-center justify-between">
           <div>
             © {new Date().getFullYear()} <span>{name}</span>

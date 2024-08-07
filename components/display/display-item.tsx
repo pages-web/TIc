@@ -6,7 +6,7 @@ import Link from 'next/link';
 const DisplayItem = ({ image, title, content, summary }: IArticle) => {
   return (
     <>
-      <div className="overflow-hidden rounded-lg md:rounded-2xl bg-neutral-100">
+      <div className="overflow-hidden rounded-lg lg:rounded-2xl bg-neutral-100">
         <div className="relative aspect-square">
           <Image
             src={image?.url}

@@ -10,7 +10,7 @@ const CategorySidebarTrigger = () => {
   return (
     <Button
       variant={'ghost'}
-      className="font-semibold md:hidden"
+      className="font-semibold lg:hidden"
       onClick={() => setOpen(true)}
     >
       <SlidersHorizontalIcon className="h-4 w-4 mr-1" strokeWidth={2.2} />

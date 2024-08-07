@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 const Mobile = dynamic(() => import('./category-sidebar-mobile'), {
-  loading: () => <div className="md:w-[303px]"></div>
+  loading: () => <div className="lg:w-[303px]"></div>,
 });
 
 const CategorySidebar = ({ children }: React.PropsWithChildren) => {
@@ -14,12 +14,12 @@ const CategorySidebar = ({ children }: React.PropsWithChildren) => {
   if (isDesktop)
     return (
       <div className="w-[303px]">
-        <div className="sticky md:top-28 min-h-[900px]">{children}</div>
+        <div className="sticky lg:top-28 min-h-[900px]">{children}</div>
       </div>
     );
 
   return (
-    <div className="md:w-[303px]">
+    <div className="lg:w-[303px]">
       <Suspense>
         <Mobile>
           <div className="grid grid-rows-category-sidebar h-full">

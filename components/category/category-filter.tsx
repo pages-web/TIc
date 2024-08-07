@@ -5,7 +5,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '../ui/select';
 
 const CategoryFilter = () => {
@@ -15,13 +15,13 @@ const CategoryFilter = () => {
 
   return (
     <div>
-      <span className="block py-2 px-4 mb-4 bg-neutral-100 typography-headline-6 font-bold text-neutral-900 uppercase tracking-widest md:rounded-md">
+      <span className="block py-2 px-4 mb-4 bg-neutral-100 typography-headline-6 font-bold text-neutral-900 uppercase tracking-widest lg:rounded-md">
         Эрэмблэх
       </span>
       <Select
         defaultValue={'newToOld'}
         value={sort || 'newToOld'}
-        onValueChange={val =>
+        onValueChange={(val) =>
           router.push(`/category?sort=${val}&order=${order}`)
         }
       >

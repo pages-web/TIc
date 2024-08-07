@@ -16,7 +16,7 @@ const DefaultLayout = ({ children }: React.PropsWithChildren) => {
       <NavbarTop>
         <Button
           variant="ghost"
-          className="hover:bg-background/10 hover:text-white hidden md:inline-flex"
+          className="hover:bg-background/10 hover:text-white hidden lg:inline-flex"
           asChild
         >
           <Link href={'/category'}>
@@ -24,10 +24,10 @@ const DefaultLayout = ({ children }: React.PropsWithChildren) => {
             <ChevronDownIcon className="h-4 w-4 ml-1" />
           </Link>
         </Button>
-        <Suspense fallback={<div className="hidden md:block flex-1" />}>
-          <Search className="hidden md:block flex-1 max-w-2xl mr-auto" />
+        <Suspense fallback={<div className="hidden lg:block flex-1" />}>
+          <Search className="hidden lg:block flex-1 max-w-2xl mr-auto" />
         </Suspense>
-        <nav className="hidden md:flex md:flex-row md:flex-nowrap gap-4">
+        <nav className="hidden lg:flex lg:flex-row lg:flex-nowrap gap-4">
           <CartTrigger />
           <CurrentUser />
         </nav>

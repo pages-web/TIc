@@ -61,8 +61,8 @@ const Gallery = ({ attachments = [] }: { attachments: IAttachment[] }) => {
       <Carousel
         orientation="vertical"
         className={cn(
-          'w-28 hidden md:block',
-          attachments.length === 1 && 'md:hidden'
+          'w-28 hidden lg:block',
+          attachments.length === 1 && 'lg:hidden'
         )}
         opts={{ containScroll: 'keepSnaps', dragFree: true }}
         setApi={(ap) => setThumbApi(ap)}

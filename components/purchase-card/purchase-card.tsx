@@ -25,12 +25,12 @@ const PurchaseCard = ({
     hasSimilarity,
   };
   return (
-    <Card className="md:sticky md:top-28">
+    <Card className="lg:sticky lg:top-28">
       <CardHeader>
         {/* <div>
-          <Badge className="bg-indigo-600 h-auto py-1 md:py-1.5 px-2 md:px-3 text-sm">
-            <Tag className="h-4 w-4 md:h-5 md:w-5" />
-            <span className="ml-1 md:ml-2 inline-block">Sale</span>
+          <Badge className="bg-indigo-600 h-auto py-1 lg:py-1.5 px-2 lg:px-3 text-sm">
+            <Tag className="h-4 w-4 lg:h-5 lg:w-5" />
+            <span className="ml-1 lg:ml-2 inline-block">Sale</span>
           </Badge>
         </div> */}
         <h1
@@ -53,7 +53,7 @@ const PurchaseCard = ({
         <Remainder remainder={remainder} />
         <ChooseProduct {...product} />
       </CardHeader>
-      <CardContent className="md:py-0">
+      <CardContent className="lg:py-0">
         <Separator />
         <AddToCart {...product} />
         <Separator />

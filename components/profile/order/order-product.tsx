@@ -13,16 +13,16 @@ const OrderProduct = ({
   const name = productName?.split('-')[1];
   const code = productName?.split('-')[0];
   return (
-    <div className="overflow-hidden flex p-2 border-b last-of-type:border-b-0 gap-2 md:gap-0">
+    <div className="overflow-hidden flex p-2 border-b last-of-type:border-b-0 gap-2 lg:gap-0">
       <Image
         src={productImgUrl}
         alt=""
         height={200}
         width={200}
-        className="h-20 w-20 md:h-32 md:w-32 rounded overflow-hidden flex-none"
+        className="h-20 w-20 lg:h-32 lg:w-32 rounded overflow-hidden flex-none"
       />
 
-      <div className="flex justify-between flex-1 p-2 md:p-6 flex-wrap text-sm md:text-base gap-2 md:gap-0">
+      <div className="flex justify-between flex-1 p-2 lg:p-6 flex-wrap text-sm lg:text-base gap-2 lg:gap-0">
         <div>
           <div className="text-sm text-neutral-500">#{code}</div>
           <h3 className="font-medium capitalize mb-1">{name || productName}</h3>

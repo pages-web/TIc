@@ -11,7 +11,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import {
   billTypeAtom,
   deliveryInfoAtom,
-  registerNumberAtom
+  registerNumberAtom,
 } from '@/store/order.store';
 import { changeDeliveryInfoAtom } from '@/store/order.store';
 import { LoadingIcon } from '../ui/loading';
@@ -35,21 +35,21 @@ export const formSchema = z
     callBefore: z.boolean(),
     onlyAfternoon: z.boolean(),
     billType: z.enum(['1', '3', '9'], {
-      required_error: 'You need to select a notification type.'
+      required_error: 'You need to select a notification type.',
     }),
     registerNumber: z.string().optional(),
-    companyName: z.string().optional()
+    companyName: z.string().optional(),
   })
-  .refine(data => (data.billType === '3' ? !!data.registerNumber : true), {
+  .refine((data) => (data.billType === '3' ? !!data.registerNumber : true), {
     message: 'Register number is required',
-    path: ['registerNumber'] // path of error
+    path: ['registerNumber'], // path of error
   })
   .refine(
-    data =>
+    (data) =>
       data.billType === '3' && data.registerNumber ? !!data.companyName : true,
     {
       message: 'Register number is incorrect',
-      path: ['companyName'] // path of error
+      path: ['companyName'], // path of error
     }
   );
 
@@ -58,7 +58,7 @@ const AddressForm = () => {
     firstName = '',
     lastName = '',
     email = '',
-    phone = ''
+    phone = '',
   } = useAtomValue(currentUserAtom) || {};
   const deliveryInfo = useAtomValue(deliveryInfoAtom);
   const billType = useAtomValue(billTypeAtom);
@@ -82,8 +82,8 @@ const AddressForm = () => {
       onlyAfternoon: false,
       billType: billType || '1',
       registerNumber: registerNumber || '',
-      ...deliveryInfo
-    }
+      ...deliveryInfo,
+    },
   });
 
   function onSubmit(v: z.infer<typeof formSchema>) {
@@ -94,17 +94,17 @@ const AddressForm = () => {
   return (
     <Form {...form}>
       <form
-        className="md:grid md:grid-cols-12 md:gap-x-6"
+        className="lg:grid lg:grid-cols-12 lg:gap-x-6"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="col-span-7">
-          <div className="md:grid grid-cols-6 mb-10 md:mb-0 space-y-4 md:space-y-0 gap-x-4 gap-y-3 ">
+          <div className="lg:grid grid-cols-6 mb-10 lg:mb-0 space-y-4 lg:space-y-0 gap-x-4 gap-y-3 ">
             <PersonalInfo form={form} />
             <Ebarimt form={form} />
             <AddressInfo form={form} />
           </div>
         </div>
-        <OrderSummary className="col-span-5 md:sticky md:top-20 h-fit">
+        <OrderSummary className="col-span-5 lg:sticky lg:top-20 h-fit">
           <Button className="w-full" size="lg" disabled={loading}>
             {loading && <LoadingIcon />}
             Үргэлжлүүлэх

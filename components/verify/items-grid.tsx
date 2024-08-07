@@ -8,10 +8,10 @@ const ItemsGrid = () => {
   const cart = useAtomValue(cartAtom);
 
   return (
-    <div className="flex items-center gap-4 mt-4 pb-7">
-      {cart.map(item => (
+    <div className="flex items-center flex-wrap gap-4 mt-4 pb-7">
+      {cart.map((item) => (
         <div
-          className="border rounded-lg aspect-square overflow-hidden w-24 md:w-32 relative"
+          className="border rounded-lg aspect-square overflow-hidden w-24 lg:w-32 relative"
           key={item._id}
         >
           <Image

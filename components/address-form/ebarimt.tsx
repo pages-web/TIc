@@ -4,7 +4,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
 import { z } from 'zod';
@@ -18,14 +18,14 @@ import { useCheckRegister } from '@/sdk/queries/order';
 import { LoadingIcon } from '../ui/loading';
 
 const Ebarimt = ({
-  form
+  form,
 }: {
   form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
 }) => {
   const billType = useAtomValue(billTypeAtom);
   const [isOrg, changeIsOrg] = useState(billType === '3');
   const [registerNumber, setRegisterNumber] = useState('');
-  const { checkRegister, loading } = useCheckRegister(name =>
+  const { checkRegister, loading } = useCheckRegister((name) =>
     form.setValue('companyName', name)
   );
 
@@ -46,12 +46,12 @@ const Ebarimt = ({
           <FormItem className="space-y-3 col-span-6">
             <FormControl>
               <RadioGroup
-                onValueChange={value => {
+                onValueChange={(value) => {
                   field.onChange(value);
                   changeIsOrg(value === '3' ? true : false);
                 }}
                 defaultValue={field.value}
-                className="grid grid-cols-2 md:grid-cols-3"
+                className="grid grid-cols-2 lg:grid-cols-3"
               >
                 <FormItem className="flex items-center space-x-3 space-y-0 ">
                   <FormControl>
@@ -84,7 +84,7 @@ const Ebarimt = ({
                   <Input
                     placeholder="Регистерийн дугаараа оруулна уу"
                     {...field}
-                    onChange={e => {
+                    onChange={(e) => {
                       setRegisterNumber(e.target.value);
                       field.onChange(e.target.value);
                     }}

@@ -34,7 +34,7 @@ const PaymentMethods = () => {
 
   return (
     <>
-      <h2 className="font-medium md:text-lg text-black/80 mb-4">
+      <h2 className="font-medium lg:text-lg text-black/80 mb-4">
         Төлбөрийн төрлөө сонгоно уу
       </h2>
       {loading || creatingInvoice ? (
@@ -45,7 +45,7 @@ const PaymentMethods = () => {
           onValueChange={(value) => setSelectedPayment(value)}
         >
           <div className="space-y-3">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {payments.map(({ kind, _id, name }) => (
                 <PaymentType
                   selected={selectedPayment === kind}

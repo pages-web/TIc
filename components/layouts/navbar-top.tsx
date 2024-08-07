@@ -16,11 +16,11 @@ export async function NavbarTop({
   return (
     <header
       className={
-        'h-14 md:h-[111px] z-50 md:sticky md:-top-3 md:pt-2.5 md:shadow-md bg-primary text-white'
+        'h-14 lg:h-[111px] z-50 lg:sticky lg:-top-3 lg:pt-2.5 lg:shadow-md bg-primary text-white'
       }
       {...rest}
     >
-      <div className="flex gap-[clamp(1rem,3vw,3rem)] items-center w-full md:h-[60px] md:sticky top-0 container pt-1 md:pt-0">
+      <div className="flex gap-[clamp(1rem,3vw,3rem)] items-center w-full lg:h-[60px] lg:sticky top-0 container pt-1 lg:pt-0">
         <Link
           href="/"
           aria-label="SF Homepage"
@@ -40,7 +40,7 @@ export async function NavbarTop({
         {children}
       </div>
 
-      <div className="hidden md:block bg-primary sticky top-[60px]">
+      <div className="hidden lg:block bg-primary sticky top-[60px]">
         <Separator className="bg-background/10" />
         <div className="container py-0.5 flex">
           <Suspense>

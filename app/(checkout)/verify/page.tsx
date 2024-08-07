@@ -15,7 +15,7 @@ const Verify = () => {
   return (
     <CheckoutLayout title="Баталгаажуулах" backTitle="Буцах" backUrl="/address">
       <VerifyLayout>
-        <div className="md:grid md:grid-cols-12 md:gap-x-6">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-6">
           <div className="col-span-7">
             <div className="text-black/60 ">Захиалга</div>
             <ItemsGrid />
@@ -23,7 +23,7 @@ const Verify = () => {
             <VerifyAddress />
           </div>
           <OrderSummary
-            className="col-span-5 md:sticky md:top-20 h-fit"
+            className="col-span-5 lg:sticky lg:top-20 h-fit"
             content={<ItemsSummary />}
           >
             <VerifyButton />

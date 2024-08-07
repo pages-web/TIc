@@ -4,7 +4,7 @@ import {
   SheetClose,
   SheetContent,
   SheetHeader,
-  SheetTitle
+  SheetTitle,
 } from '../ui/sheet';
 import { cartSheetAtom } from '@/store';
 import { Button } from '../ui/button';
@@ -22,8 +22,8 @@ const Cart = () => {
   const cart = useAtomValue(cartItemAtomAtoms);
 
   return (
-    <Sheet open={openSheet} onOpenChange={op => setOpenSheet(op)}>
-      <SheetContent className="flex flex-col">
+    <Sheet open={openSheet} onOpenChange={(op) => setOpenSheet(op)}>
+      <SheetContent className="flex flex-col h-screen gap-2 p-4">
         <SheetHeader className="flex-row justify-between items-center space-y-0">
           <SheetTitle>Таны сагс</SheetTitle>
           <SheetClose asChild>
@@ -35,8 +35,8 @@ const Cart = () => {
         </SheetHeader>
         {cart.length > 0 ? (
           <>
-            <div className="flex-1">
-              {cart.map(cartItemAtom => (
+            <div className="flex-auto overflow-auto">
+              {cart.map((cartItemAtom) => (
                 <CartItem
                   key={`${cartItemAtom}`}
                   cartItemAtom={cartItemAtom}
@@ -47,14 +47,19 @@ const Cart = () => {
             <div className="text-sm text-neutral-500 dark:text-neutral-400">
               <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1">
                 <p>Хүргэлт</p>
-                <p className="text-right">Нийт үнэ дээр нэмэгдсэн</p>
+                <p className="text-right">Нийт үнэ дээр нэмэгдэнэ</p>
               </div>
               <div className="flex items-center justify-between border-b border-neutral-200 pb-1 pt-1">
                 <p>Нийт үнэ</p>
                 <CartTotal />
               </div>
             </div>
-            <Button size="lg" asChild onClick={() => setOpenSheet(false)}>
+            <Button
+              size="lg"
+              asChild
+              onClick={() => setOpenSheet(false)}
+              className="flex-none"
+            >
               <Link href="/cart">Худалдан авах</Link>
             </Button>
           </>

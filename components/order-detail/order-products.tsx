@@ -11,11 +11,11 @@ const OrderProducts = () => {
   const deliveryProductId = useAtomValue(deliveryItemIdAtom);
   return (
     <Card>
-      <CardHeader className="md:py-4">
+      <CardHeader className="lg:py-4">
         <CardTitle className="text-lg font-semibold">Бүтээгдэхүүнүүд</CardTitle>
       </CardHeader>
       <Separator />
-      {filterDeliveryProduct(items, deliveryProductId).map(item => (
+      {filterDeliveryProduct(items, deliveryProductId).map((item) => (
         <OrderProduct {...item} key={item._id} />
       ))}
     </Card>

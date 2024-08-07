@@ -36,8 +36,8 @@ const PaymentDetail = () => {
         variables: {
           invoiceId: invoiceDetail?._id,
           paymentId: selectedMethod,
-          amount: invoiceDetail?.amount
-        }
+          amount: invoiceDetail?.amount,
+        },
       });
     }
   }, [selectedMethod]);
@@ -48,7 +48,7 @@ const PaymentDetail = () => {
 
   return (
     <>
-      <DialogHeader className="flex-row gap-4 items-center justify-between my-2 md:mt-0">
+      <DialogHeader className="flex-row gap-4 items-center justify-between my-2 lg:mt-0">
         <div className="flex items-center gap-4">
           <Image
             src={`/images/payments/${kind}.png`}
@@ -60,7 +60,7 @@ const PaymentDetail = () => {
             <div className="font-medium capitalize leading-none mb-0.5">
               {kind}
             </div>
-            <div className="text-neutral-500 text-xs md:text-md">
+            <div className="text-neutral-500 text-xs lg:text-md">
               {isQr
                 ? 'Qr кодыг уншуулж төлбөрөө төлнө үү'
                 : 'Бүртгэлтэй утасны дугаараа оруулна уу'}
@@ -94,14 +94,14 @@ const PaymentDetail = () => {
         <PhoneDetail
           kind={kind}
           loading={loading}
-          handleCreate={values =>
+          handleCreate={(values) =>
             addTransaction({
               variables: {
                 invoiceId: invoiceDetail?._id,
                 paymentId: selectedMethod,
                 amount: invoiceDetail?.amount,
-                details: { phone: values?.phone }
-              }
+                details: { phone: values?.phone },
+              },
             })
           }
           data={data}

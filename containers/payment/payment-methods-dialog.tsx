@@ -18,12 +18,12 @@ const PaymentMethods = () => {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent
           side="bottom"
-          className="md:h-[95vh] md:max-h-[768px] rounded-t-2xl"
+          className="lg:h-[95vh] lg:max-h-[768px] rounded-t-2xl"
         >
           <div className="relative">
             <SheetPrimitive.Close asChild>
               <Button
-                className="absolute right-0 md:right-5 -top-1 rounded-full"
+                className="absolute right-0 lg:right-5 -top-1 rounded-full"
                 variant="outline"
                 size="icon"
               >

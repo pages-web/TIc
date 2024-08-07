@@ -8,13 +8,13 @@ const OrderUser = () => {
 
   return (
     <Card>
-      <CardHeader className="md:py-4">
+      <CardHeader className="lg:py-4">
         <CardTitle className="text-lg font-semibold">
           Захиалагчийн мэдээлэл
         </CardTitle>
       </CardHeader>
       <Separator />
-      <CardContent className="flex items-center justify-between text-sm flex-wrap md:flex-nowrap gap-4 md:gap-0 py-4 md:py-6">
+      <CardContent className="flex items-center justify-between text-sm flex-wrap lg:flex-nowrap gap-4 lg:gap-0 py-4 lg:py-6">
         <div>
           <div className="text-black/60">Овог</div>
           <div className="font-medium">{lastName || '-'}</div>

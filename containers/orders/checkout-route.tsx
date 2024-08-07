@@ -16,7 +16,7 @@ const CheckoutRoute = ({ children }: React.PropsWithChildren) => {
   if (loadingOrder)
     return (
       <>
-        <div className="flex items-center justify-center py-40 col-span-7 mb-10 md:mb-0">
+        <div className="flex items-center justify-center py-40 col-span-7 mb-10 lg:mb-0">
           <LoadingIcon />
         </div>
       </>

@@ -5,9 +5,9 @@ import CartProductList from '@/components/cart-product-list/cart-product-list';
 const CartPageContent = ({ children }: React.PropsWithChildren) => {
   return (
     <>
-      <span className="col-span-7 mb-10 md:mb-0">
+      <div className="col-span-7 pb-10 lg:pb-0">
         <CartProductList />
-      </span>
+      </div>
       {children}
     </>
   );

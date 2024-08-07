@@ -25,12 +25,12 @@ const CategoryPageContent = ({
 }: CategoryPageContentProps) => {
   return (
     <div className="mb-20">
-      <h1 className="md:my-6 font-bold text-2xl md:text-4xl">{title}</h1>
-      <div className="md:flex gap-6">
+      <h1 className="lg:my-6 font-bold text-2xl lg:text-4xl">{title}</h1>
+      <div className="lg:flex gap-6">
         <CategorySidebar>{sidebar}</CategorySidebar>
         <div className="flex-1">
-          <div className="flex justify-between items-center py-3 mb-2 sticky md:py-0 md:static top-0 z-50 bg-background">
-            <span className="font-bold md:text-lg inline-flex items-center">
+          <div className="flex justify-between items-center py-3 mb-2 sticky lg:py-0 lg:static top-0 z-50 bg-background">
+            <span className="font-bold lg:text-lg inline-flex items-center">
               {totalProducts} бүтээгдэхүүн <SearchBadge />
             </span>
             <CategorySidebarTrigger />

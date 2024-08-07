@@ -22,7 +22,7 @@ const settings = {
     long: 'vertical',
   },
   className: {
-    lg: 'col-span-2 row-span-2  aspect-square md:aspect-auto h-auto md:mb-4',
+    lg: 'col-span-2 row-span-2  aspect-square lg:aspect-auto h-auto lg:mb-4',
     sm: 'aspect-square rounded-[0.5em]',
     long: 'col-span-2 aspect-[3/1] rounded-[0.5em]',
   },

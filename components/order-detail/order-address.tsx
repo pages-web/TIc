@@ -8,13 +8,13 @@ const OrderAddress = () => {
 
   return (
     <Card>
-      <CardHeader className="md:py-4">
+      <CardHeader className="lg:py-4">
         <CardTitle className="text-lg font-semibold">
           Хүргэлтийн мэдээлэл
         </CardTitle>
       </CardHeader>
       <Separator />
-      <CardContent className="flex items-center md:justify-between text-sm flex-wrap md:flex-nowrap gap-4 py-4">
+      <CardContent className="flex items-center lg:justify-between text-sm flex-wrap lg:flex-nowrap gap-4 py-4">
         <div>
           <div className="text-foreground/60">Хүргэлтийн мэдээлэл</div>
           <div className="font-medium">

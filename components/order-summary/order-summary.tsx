@@ -6,7 +6,7 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '../ui/card';
 import { Separator } from '../ui/separator';
 import DeliveryFee from './delivery-fee';
@@ -14,20 +14,22 @@ import DeliveryFee from './delivery-fee';
 const OrderSummary = ({
   className,
   children,
-  content
+  content,
 }: React.PropsWithChildren & {
   className?: string;
   content?: React.ReactNode;
 }) => {
   return (
     <Card className={className}>
-      <CardHeader className="flex-row space-y-0 justify-between items-center md:py-4">
-        <CardTitle className="md:text-lg">Төлбөрийн мэдээлэл</CardTitle>
+      <CardHeader className="flex-row space-y-0 justify-between items-center lg:py-4">
+        <CardTitle className="text-base lg:text-lg">
+          Төлбөрийн мэдээлэл
+        </CardTitle>
         <div className="font-semibold">
           (Бүтээгдэхүүн: <CartCount />)
         </div>
       </CardHeader>
-      <CardContent className="py-0 md:py-0 space-y-2">
+      <CardContent className="py-0 lg:py-0 space-y-2">
         {!!content && (
           <div>
             <Separator />
@@ -37,9 +39,9 @@ const OrderSummary = ({
         )}
         <DeliveryFee />
       </CardContent>
-      <CardFooter className="flex-col gap-4 md:pb-6 md:pt-3">
+      <CardFooter className="flex-col gap-4 lg:pb-6 pt-3">
         <Separator />
-        <div className="text-lg md:text-xl font-bold flex justify-between w-full">
+        <div className="text-base lg:text-xl font-bold flex justify-between w-full">
           <p>Нийт төлөх дүн</p>
           <CartTotal />
         </div>

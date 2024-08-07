@@ -119,14 +119,14 @@ const Product = async ({ params, searchParams }: IPageProps) => {
           .concat([{ name, link: `/product/${_id}` }])}
       >
         <div
-          className="md:grid gap-x-6"
+          className="lg:grid gap-x-6"
           style={{
             gridTemplateAreas: `"left-top right"
           "left-bottom right"`,
             gridTemplateColumns: `minmax(50%, 500px) auto`,
           }}
         >
-          <section className="md:h-full " style={{ gridArea: `left-top` }}>
+          <section className="lg:h-full " style={{ gridArea: `left-top` }}>
             <Gallery
               attachments={(attachmentMore || []).concat([
                 attachment as IAttachment,
@@ -134,12 +134,12 @@ const Product = async ({ params, searchParams }: IPageProps) => {
             />
           </section>
           <section
-            className="mb-10 md:mb-0 py-5 "
+            className="mb-10 lg:mb-0 py-5 "
             style={{ gridArea: `right` }}
           >
             <PurchaseCard {...product} />
           </section>
-          <section className="md:mt-8" style={{ gridArea: `left-bottom` }}>
+          <section className="lg:mt-8" style={{ gridArea: `left-bottom` }}>
             <Separator />
             <ProductAccordion
               activeId={_id}

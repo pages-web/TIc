@@ -17,7 +17,7 @@ const Success = () => {
               strokeWidth={2.5}
             />
           </div>
-          <div className="md:text-xl font-bold pt-6 text-center text-neutral-700">
+          <div className="lg:text-xl font-bold pt-6 text-center text-neutral-700">
             Таны төлбөр амжилттай төлөгдлөө
           </div>
           <div className="text-neutral-500 pt-2 font-medium text-center">

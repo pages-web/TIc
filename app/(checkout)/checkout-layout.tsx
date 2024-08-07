@@ -18,8 +18,8 @@ const CheckoutLayout = ({
     <div className="container pb-20 flex-auto">
       <PrivateRoute>
         <CheckoutRoute>
-          <div className="flex justify-between md:mt-8 my-6 md:mb-10 items-center">
-            <h1 className="text-xl md:text-4xl font-bold">{title}</h1>
+          <div className="flex justify-between lg:mt-8 my-6 lg:mb-10 items-center">
+            <h1 className="text-xl lg:text-2xl font-bold">{title}</h1>
             <Button size="lg" variant="secondary" asChild>
               <Link href={backUrl}>
                 <ArrowLeftIcon className="h-5 w-5 mr-2" />

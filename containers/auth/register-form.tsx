@@ -11,7 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Password } from '@/components/ui/password';
@@ -29,7 +29,7 @@ const formSchema = z.object({
   lastName: z.string().optional(),
   email: z.string().email(),
   phone: phoneZod,
-  password: passwordZod
+  password: passwordZod,
 });
 
 const RegisterForm = () => {
@@ -41,8 +41,8 @@ const RegisterForm = () => {
       lastName: '',
       email: '',
       phone: '',
-      password: ''
-    }
+      password: '',
+    },
   });
   const { register, loading, clientPortalId } = useRegister();
 
@@ -51,16 +51,16 @@ const RegisterForm = () => {
       variables: { ...values, clientPortalId },
       onCompleted() {
         toast.success('Congratulations, You registered successfully', {
-          description: 'Таны имэйл рүү баталгаажуулах холбоос илгээлээ.'
+          description: 'Таны имэйл рүү баталгаажуулах холбоос илгээлээ.',
         });
         router.push('/login');
-      }
+      },
     });
   }
   return (
     <Form {...form}>
       <form
-        className="md:grid grid-cols-2 space-y-4 md:space-y-0 gap-y-6 gap-x-3 relative"
+        className="lg:grid grid-cols-2 space-y-4 lg:space-y-0 gap-y-6 gap-x-3 relative"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField

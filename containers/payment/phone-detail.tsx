@@ -6,7 +6,7 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import { LoadingIcon } from '@/components/ui/loading';
 import { phoneZod } from '@/lib/zod';
@@ -21,11 +21,11 @@ import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
-  InputOTPSlot
+  InputOTPSlot,
 } from '@/components/ui/input-otp';
 
 const formSchema = z.object({
-  phone: phoneZod
+  phone: phoneZod,
 });
 
 const PhoneDetail = ({
@@ -33,7 +33,7 @@ const PhoneDetail = ({
   loading,
   handleCreate,
   errorDescription,
-  data
+  data,
 }: {
   kind?: string;
   loading: boolean;
@@ -52,8 +52,8 @@ const PhoneDetail = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     values: {
-      phone: phone || ''
-    }
+      phone: phone || '',
+    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -137,7 +137,7 @@ const PhoneDetail = ({
             </AlertDescription>
           </Alert>
         )}
-        <DialogFooter className="sm:justify-center gap-2 pt-4 block md:flex space-y-2 md:space-y-0">
+        <DialogFooter className="sm:justify-center gap-2 pt-4 block lg:flex space-y-2 lg:space-y-0">
           <BackButton disabled={loading} />
           <Button size="lg" className="flex-1 w-full" disabled={loading}>
             {loading && <LoadingIcon />} Хүсэлт илгээх

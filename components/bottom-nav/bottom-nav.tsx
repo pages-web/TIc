@@ -51,7 +51,7 @@ const BottomNav = () => {
   const pathname = usePathname();
   const openCart = useSetAtom(cartSheetAtom);
   return (
-    <div className="z-50 w-full fixed bottom-0 left-0 flex flex-row items-stretch md:hidden bg-primary">
+    <div className="z-50 w-full fixed bottom-0 left-0 flex flex-row items-stretch lg:hidden bg-primary">
       {getItems().map(({ label, Icon, path }) => {
         if (path === '/profile')
           return <BottomProfile key={label} Icon={Icon} />;

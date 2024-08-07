@@ -11,9 +11,9 @@ const Cart = () => {
       backTitle="Дэлгүүр рүү буцах"
       backUrl="/category"
     >
-      <div className="md:grid md:grid-cols-12 md:gap-x-6">
+      <div className="lg:grid lg:grid-cols-12 lg:gap-x-6">
         <CartPageContent>
-          <OrderSummary className="col-span-5 md:sticky md:top-20 h-fit">
+          <OrderSummary className="col-span-5 lg:sticky lg:top-32 h-fit">
             <Button asChild size={'lg'} className="w-full">
               <Link href="/address">Худалдан авах</Link>
             </Button>

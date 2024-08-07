@@ -5,7 +5,7 @@ import {
   PhoneIcon,
   Smartphone,
   User2Icon,
-  type LucideIcon
+  type LucideIcon,
 } from 'lucide-react';
 import { TabsList, TabsTrigger } from '../ui/tabs';
 import { useAtomValue } from 'jotai';
@@ -16,7 +16,7 @@ const ProfileTabTrigger = ({
   value,
   children,
   Icon,
-  description
+  description,
 }: React.PropsWithChildren & {
   value: string;
   description: string;
@@ -42,7 +42,7 @@ const ProfileTabsList = () => {
   const { loading } = useUserDetail();
 
   return (
-    <TabsList className="flex w-full h-16 p-0 gap-3 bg-background justify-start md:justify-center overflow-auto mb-6 md:mb-4 rounded-none">
+    <TabsList className="flex w-full h-16 p-0 gap-3 bg-background justify-start lg:justify-center overflow-auto mb-6 lg:mb-4 rounded-none">
       <ProfileTabTrigger
         value="info"
         Icon={User2Icon}
