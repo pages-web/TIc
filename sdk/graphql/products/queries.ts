@@ -44,14 +44,7 @@ const products = gql`
       sortDirection: $sortDirection
     )  {
       ${commonFields}
-      category {
-        name
-        _id
-      }
       unitPrice
-      type
-      description
-      remainder
       hasSimilarity
       attachment {
         url
