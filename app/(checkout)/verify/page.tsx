@@ -1,9 +1,5 @@
 import OrderSummary from '@/components/order-summary/order-summary';
 import CheckoutLayout from '../checkout-layout';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import ItemsSummary from '@/components/verify/items-summary';
 import ItemsGrid from '@/components/verify/items-grid';
