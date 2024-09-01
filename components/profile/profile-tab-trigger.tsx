@@ -2,7 +2,6 @@
 import {
   LockIcon,
   MailIcon,
-  PhoneIcon,
   Smartphone,
   User2Icon,
   type LucideIcon,

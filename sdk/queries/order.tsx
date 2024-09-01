@@ -1,33 +1,42 @@
 import {
   type OperationVariables,
   useQuery,
-  useLazyQuery
+  useLazyQuery,
 } from '@apollo/client';
-import { queries, subscriptions } from '../graphql/order';
+import { queries } from '../graphql/order';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { currentUserAtom } from '@/store/auth.store';
 import {
   initialLoadingOrderAtom,
   loadingOrderAtom,
-  activeOrderAtom
+  activeOrderAtom,
+  temporaryOrderIdAtom,
 } from '@/store/order.store';
-import { defaultOrderItem, cudOrderAtom } from '@/store/order.store';
-import { localCartAtom } from '@/store/cart.store';
+import { cudOrderAtom } from '@/store/order.store';
 import { OrderItem } from '@/types/order.types';
 import { useEffect, useMemo } from 'react';
 import { ORDER_SALE_STATUS, ORDER_STATUSES } from '@/lib/constants';
 import { onError } from '@/lib/utils';
 import { refetchOrderDetailAtom } from '@/store/payment.store';
+import { useMergeOrder } from '../hooks/order';
 
-const useCurrentOrder = () => {
+export const useActiveOrder = () => {
   const { erxesCustomerId } = useAtomValue(currentUserAtom) || {};
-  const setCurrentAtom = useSetAtom(activeOrderAtom);
-  const [localCart, setLocalCart] = useAtom(localCartAtom);
   const setLoadingOrder = useSetAtom(loadingOrderAtom);
   const setInitialLoadingOrder = useSetAtom(initialLoadingOrderAtom);
   const setTriggerCRUD = useSetAtom(cudOrderAtom);
 
-  const { data, error, loading } = useQuery(queries.currentOrder, {
+  const { merge } = useMergeOrder();
+  const setActiveOrder = useSetAtom(activeOrderAtom);
+
+  const stopLoading = () => {
+    setLoadingOrder(false);
+    setInitialLoadingOrder(false);
+    setTriggerCRUD(false);
+  };
+
+  const temporaryOrderId = useAtomValue(temporaryOrderIdAtom);
+  const customerOrderQuery = useQuery(queries.currentOrder, {
     variables: {
       customerId: erxesCustomerId,
       statuses: ORDER_STATUSES.ALL,
@@ -35,66 +44,69 @@ const useCurrentOrder = () => {
       perPage: 1,
       page: 1,
       sortField: 'createdAt',
-      sortDirection: -1
+      sortDirection: -1,
     },
-    skip: !erxesCustomerId
+    skip: !erxesCustomerId,
   });
 
-  const fullOrders = useMemo(() => data?.fullOrders, [data]);
+  const visitorOrderQuery = useQuery(queries.activeOrderDetail, {
+    variables: {
+      id: temporaryOrderId,
+      customerId: 'visitor',
+    },
+    skip: !temporaryOrderId,
+    onError,
+  });
+
+  const customerOrder = (customerOrderQuery?.data?.fullOrders || [])[0];
+  const visitorOrder = visitorOrderQuery?.data?.orderDetail;
 
   useEffect(() => {
-    if (fullOrders) {
-      const currentOrder = (fullOrders || [])[0];
-      setLoadingOrder(false);
-      setInitialLoadingOrder(false);
-      setTriggerCRUD(false);
-      setCurrentAtom(currentOrder || defaultOrderItem);
-      if (localCart.length > 0) {
-        if (!currentOrder) {
-          setCurrentAtom({
-            ...currentOrder,
-            items: localCart
-          });
-        } else {
-          setCurrentAtom({
-            ...currentOrder,
-            items: syncCarts(localCart, currentOrder.items)
-          });
-        }
-        setTriggerCRUD(true);
-        setLocalCart([]);
+    if (!erxesCustomerId && visitorOrder) {
+      stopLoading();
+      setActiveOrder(visitorOrder);
+      return;
+    }
+
+    if (customerOrder) {
+      stopLoading();
+      if (!temporaryOrderId) {
+        setActiveOrder(customerOrder);
+        return;
+      }
+      if (visitorOrder) {
+        merge(customerOrder, visitorOrder);
       }
     }
-  }, [fullOrders]);
-
-  const currentOrder = (fullOrders || [])[0];
-
-  return { loading, currentOrder, error };
+  }, [customerOrder, temporaryOrderId, visitorOrder]);
 };
 
-const syncCarts = (localCart: OrderItem[], items: OrderItem[]) => {
-  const synchronizedCart = localCart.map(localItem => {
-    const matchingSavedItem = items.find(
-      savedItem => savedItem.productId === localItem.productId
-    );
-    if (matchingSavedItem) {
-      // If the product exists in the saved cart, update the count by summing the values
-      return { ...localItem, count: localItem.count + matchingSavedItem.count };
+export const syncCarts = (
+  localCart: OrderItem[],
+  items: OrderItem[]
+): OrderItem[] => {
+  const itemMap = new Map<string, OrderItem>();
+
+  // Add all local items to the map
+  localCart.forEach((localItem) => {
+    itemMap.set(localItem.productId, localItem);
+  });
+
+  // Merge saved items into the map
+  items.forEach((savedItem) => {
+    const existingItem = itemMap.get(savedItem.productId);
+    if (existingItem) {
+      itemMap.set(savedItem.productId, {
+        ...existingItem,
+        count: existingItem.count + savedItem.count,
+      });
     } else {
-      return localItem;
+      itemMap.set(savedItem.productId, savedItem);
     }
   });
 
-  items.forEach(savedItem => {
-    const isAlreadyInLocalCart = synchronizedCart.some(
-      localItem => localItem.productId === savedItem.productId
-    );
-    if (!isAlreadyInLocalCart) {
-      synchronizedCart.push(savedItem);
-    }
-  });
-
-  return synchronizedCart;
+  // Convert map back to array
+  return Array.from(itemMap.values());
 };
 
 export const useFullOrders = (props?: { variables?: OperationVariables }) => {
@@ -107,10 +119,10 @@ export const useFullOrders = (props?: { variables?: OperationVariables }) => {
       saleStatus: ORDER_SALE_STATUS.CONFIRMED,
       sortField: 'createdAt',
       sortDirection: -1,
-      ...variables
+      ...variables,
     },
     onError,
-    skip: !erxesCustomerId
+    skip: !erxesCustomerId,
   });
 
   const fullOrders = useMemo(() => data?.fullOrders, [data]);
@@ -124,12 +136,12 @@ export const useOrderDetail = (id: string) => {
   const { data, loading, refetch } = useQuery(queries.orderDetail, {
     variables: {
       customerId: erxesCustomerId,
-      id
+      id,
     },
     onCompleted() {
       setRefetchOrder(false);
     },
-    onError
+    onError,
   });
 
   const { orderDetail } = data || {};
@@ -153,10 +165,8 @@ export const useCheckRegister = (onCompleted?: (name: string) => void) => {
         const { found, name } = (data || {}).ordersCheckCompany || {};
 
         onCompleted && onCompleted(!found ? '' : name || 'Demo company');
-      }
+      },
     }
   );
   return { checkRegister, loading };
 };
-
-export default useCurrentOrder;

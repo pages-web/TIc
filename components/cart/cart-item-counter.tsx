@@ -1,6 +1,6 @@
 import Price from '../price/price';
 import { Counter, CounterButton, CounterInput } from '../counter/counter';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { updateCartAtom } from '@/store/cart.store';
 import { memo } from 'react';
 

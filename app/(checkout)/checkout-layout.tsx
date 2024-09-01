@@ -16,7 +16,7 @@ const CheckoutLayout = ({
 }) => {
   return (
     <div className="container pb-20 flex-auto">
-      <PrivateRoute>
+      <PrivateRoute inCheckout>
         <CheckoutRoute>
           <div className="flex justify-between lg:mt-8 my-6 lg:mb-10 items-center">
             <h1 className="text-xl lg:text-2xl font-bold">{title}</h1>

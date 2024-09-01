@@ -1,4 +1,3 @@
-import { useAtomValue } from 'jotai';
 import { Badge } from '@/components/ui/badge';
 import { getConfig } from '@/sdk/queries/auth';
 

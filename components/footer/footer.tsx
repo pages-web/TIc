@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { MailIcon, MapPinIcon, PhoneCallIcon } from 'lucide-react';
 import ErxesLogo from './erxes-logo';
 import { icons } from './icons';
+import pk from '@/package.json';
 
 const Footer = async () => {
   const { branchDetail, name } = await getBranchDetail();
@@ -72,7 +73,8 @@ const Footer = async () => {
       <div className="bg-primary text-neutral-300 py-4 text-sm pb-32 lg:py-4">
         <div className="container flex items-center justify-between">
           <div>
-            © {new Date().getFullYear()} <span>{name}</span>
+            © {new Date().getFullYear()} <span>{name}</span>{' '}
+            <span>v{pk.version}</span>
           </div>
           <div className="inline-flex items-center group">
             <Button

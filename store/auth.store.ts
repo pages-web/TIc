@@ -1,8 +1,10 @@
 import { Customer } from '@/types/auth.types';
 import { atom } from 'jotai';
 import { IConfig } from '@/types/auth.types';
+import { atomWithStorage } from 'jotai/utils';
 
 export const currentUserAtom = atom<Customer | null>(null);
+export const userTypeAtom = atomWithStorage<'visitor' | null>('userType', null);
 
 export const loadingUserAtom = atom<boolean>(true);
 

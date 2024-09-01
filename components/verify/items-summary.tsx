@@ -1,13 +1,13 @@
 'use client';
 
-import { cartAtom } from '@/store/cart.store';
+import { itemsAtom } from '@/store/order.store';
 import { useAtomValue } from 'jotai';
 import { Badge } from '../ui/badge';
 import Price from '../price/price';
 import { getProductNameCode } from '@/lib/utils';
 
 const ItemsSummary = () => {
-  const items = useAtomValue(cartAtom);
+  const items = useAtomValue(itemsAtom);
 
   return (
     <>

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-const addEditParamDefs = `$items: [OrderItemInput], $totalAmount: Float!, $type: String!, $customerId: String, $registerNumber: String, $billType: String, $origin: String, $dueDate: Date, $branchId: String, $deliveryInfo: JSON, $description: String, $saleStatus: String`;
+const addEditParamDefs = `$items: [OrderItemInput], $totalAmount: Float!, $type: String!, $customerId: String, $customerType: String, $registerNumber: String, $billType: String, $origin: String, $dueDate: Date, $branchId: String, $deliveryInfo: JSON, $description: String, $saleStatus: String`;
 
-const addEditParams = `items: $items, totalAmount: $totalAmount, type: $type, customerId: $customerId, registerNumber: $registerNumber, billType: $billType, origin: $origin, dueDate: $dueDate, branchId: $branchId, deliveryInfo: $deliveryInfo, description: $description, saleStatus: $saleStatus`;
+const addEditParams = `items: $items, totalAmount: $totalAmount, type: $type, customerId: $customerId, customerType: $customerType, registerNumber: $registerNumber, billType: $billType, origin: $origin, dueDate: $dueDate, branchId: $branchId, deliveryInfo: $deliveryInfo, description: $description, saleStatus: $saleStatus`;
 
 const ordersAdd = gql`
   mutation ordersAdd(${addEditParamDefs}) {
@@ -39,7 +39,7 @@ const mutations = {
   ordersAdd,
   ordersEdit,
   ordersCancel,
-  orderChangeSaleStatus
+  orderChangeSaleStatus,
 };
 
 export default mutations;

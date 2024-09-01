@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { queries } from '@/sdk/graphql/auth';
-import { useSetAtom, useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import {
   currentUserAtom,
   loadingUserAtom,

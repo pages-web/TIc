@@ -1,26 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*.cloudfront.net'
+        hostname: '*.cloudfront.net',
       },
       {
         protocol: 'http',
-        hostname: 'localhost'
+        hostname: 'localhost',
       },
       {
         protocol: 'https',
-        hostname: '**.erxes.io'
+        hostname: '**.erxes.io',
       },
       {
         protocol: 'https',
-        hostname: 'erxes.io'
-      }
-    ]
-  }
+        hostname: 'erxes.io',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

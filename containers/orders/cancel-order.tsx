@@ -15,10 +15,13 @@ import { LoadingIcon } from '@/components/ui/loading';
 import { useCancelOrder } from '@/sdk/hooks/order';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useAtomValue } from 'jotai';
+import { currentUserAtom } from '@/store/auth.store';
 
 function CancelOrder() {
   const { _id, number } = useDetail();
   const { cancel, loading } = useCancelOrder();
+  const currentUser = useAtomValue(currentUserAtom);
   const router = useRouter();
   return (
     <AlertDialog>
@@ -26,7 +29,7 @@ function CancelOrder() {
         <Button
           variant="outline"
           size="lg"
-          className="lg:h-12 px-0 flex-auto lg:flex-none lg:px-8"
+          className="lg:h-12 px-0 flex-auto sm:flex-none sm:px-8"
         >
           Захиалга цуцлах
         </Button>
@@ -50,7 +53,9 @@ function CancelOrder() {
                   toast.success(
                     `${number} дугаартай захиалга амжилттай цуцлагдлаа`
                   );
-                  router.replace('/profile/orders?refetch=true');
+                  router.replace(
+                    currentUser ? '/profile/orders?refetch=true' : '/'
+                  );
                 },
               })
             }

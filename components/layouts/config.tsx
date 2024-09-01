@@ -1,5 +1,4 @@
 'use client';
-import { hexToHsl } from '@/lib/utils';
 import { configAtom } from '@/store/auth.store';
 import { IConfig } from '@/types/auth.types';
 import { useSetAtom } from 'jotai';

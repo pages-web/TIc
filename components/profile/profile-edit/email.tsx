@@ -5,8 +5,8 @@ const Email = () => {
   return (
     <div className="py-12">
       <EmailDescription title="Таны цахим хаяг баталгаажсан">
-        Хэрэв та цахим хаягаа өөрчлөхийг хүсэж байгаа бол "Цахим хаяг солих"
-        товч дээр дарна уу
+        Хэрэв та цахим хаягаа өөрчлөхийг хүсэж байгаа бол &quot;Цахим хаяг
+        солих&quot; товч дээр дарна уу
       </EmailDescription>
       <ChangeEmail />
     </div>
@@ -15,7 +15,7 @@ const Email = () => {
 
 const EmailDescription = ({
   title,
-  children
+  children,
 }: React.PropsWithChildren & { title: string }) => {
   return (
     <div className="flex flex-col items-center gap-6 pb-6">

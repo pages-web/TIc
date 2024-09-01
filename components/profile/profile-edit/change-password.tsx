@@ -10,9 +10,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
-import { currentUserAtom } from '@/store/auth.store';
-import { useAtomValue } from 'jotai';
-import { useChangePassword, useUserEdit } from '@/sdk/hooks/auth';
+import { useChangePassword } from '@/sdk/hooks/auth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Password } from '@/components/ui/password';

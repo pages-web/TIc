@@ -2,10 +2,10 @@
 import Image from '@/components/ui/image';
 import { Badge } from '../ui/badge';
 import { useAtomValue } from 'jotai';
-import { cartAtom } from '@/store/cart.store';
+import { itemsAtom } from '@/store/order.store';
 
 const ItemsGrid = () => {
-  const cart = useAtomValue(cartAtom);
+  const cart = useAtomValue(itemsAtom);
 
   return (
     <div className="flex items-center flex-wrap gap-4 mt-4 pb-7">
@@ -19,6 +19,7 @@ const ItemsGrid = () => {
             height={120}
             width={120}
             className="absolute inset-0 h-full w-full"
+            alt={item.productName}
           />
           <Badge variant="secondary" className="absolute right-2 bottom-2">
             x{item.count}

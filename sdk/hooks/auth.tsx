@@ -1,11 +1,17 @@
 import { BaseMutationOptions, useMutation } from '@apollo/client';
 import { mutations } from '../graphql/auth';
 import { useSetAtom } from 'jotai';
-import { loadingUserAtom, refetchCurrentUserAtom } from '@/store/auth.store';
+import {
+  loadingUserAtom,
+  refetchCurrentUserAtom,
+  userTypeAtom,
+} from '@/store/auth.store';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { onError } from '@/lib/utils';
 import { fbLogout } from '@/lib/facebook';
+import { activeOrderAtom, defaultActiveOrder } from '@/store/order.store';
+import { IOrder } from '@/types/order.types';
 
 const clientPortalId = process.env.NEXT_PUBLIC_CP_ID;
 
@@ -31,13 +37,13 @@ const useLoginCallback = () => {
         triggerRefetchUser(true);
         setLoadingUser(true);
         toast.success('Сайн байна уу?', {
-          description: 'Та амжилттай нэвтэрлээ'
+          description: 'Та амжилттай нэвтэрлээ',
         });
 
         router.push(from ? from : '/');
         !!callback && callback();
       }
-    }
+    },
   };
 };
 
@@ -48,7 +54,7 @@ export const useLogin = (onCompleted?: () => void) => {
     onCompleted: ({ clientPortalLogin }) => {
       loginCallback(clientPortalLogin, onCompleted);
     },
-    onError
+    onError,
   });
 
   return { login, loading, clientPortalId };
@@ -60,7 +66,7 @@ export const useGoogleLogin = () => {
     onCompleted({ clientPortalGoogleAuthentication }) {
       loginCallback(clientPortalGoogleAuthentication);
     },
-    onError
+    onError,
   });
   return { googleLogin, loading, clientPortalId };
 };
@@ -71,7 +77,7 @@ export const useFacebookLogin = () => {
     onCompleted({ clientPortalFacebookAuthentication }) {
       loginCallback(clientPortalFacebookAuthentication);
     },
-    onError
+    onError,
   });
   return { facebookLogin, loading, clientPortalId };
 };
@@ -80,10 +86,10 @@ export const useRegister = (
   onCompleted?: BaseMutationOptions['onCompleted']
 ) => {
   const [register, { loading }] = useMutation(mutations.createUser, {
-    onCompleted: data => {
+    onCompleted: (data) => {
       !!onCompleted && onCompleted(data);
     },
-    onError
+    onError,
   });
 
   return { register, loading, clientPortalId };
@@ -96,7 +102,7 @@ export const useUserEdit = () => {
       setRefetchUser(true);
       toast.success('Хувийн мэдээлэл шинэчлэгдсэн');
     },
-    onError
+    onError,
   });
 
   return { loading, editUser };
@@ -106,7 +112,7 @@ export const useForgotPassword = () => {
   const [forgotPassword, { loading, data }] = useMutation(
     mutations.forgotPassword,
     {
-      onError
+      onError,
     }
   );
 
@@ -119,7 +125,7 @@ export const useChangePassword = () => {
   const [changePassword, { loading, data }] = useMutation(
     mutations.userChangePassword,
     {
-      onError
+      onError,
     }
   );
 
@@ -132,7 +138,7 @@ export const useResetPassword = () => {
   const [resetPassword, { loading, data }] = useMutation(
     mutations.resetPassword,
     {
-      onError
+      onError,
     }
   );
 
@@ -143,11 +149,15 @@ export const useResetPassword = () => {
 
 export const useLogout = () => {
   const triggerRefetchUser = useSetAtom(refetchCurrentUserAtom);
+  const setActiveOrder = useSetAtom(activeOrderAtom);
+  const setUserType = useSetAtom(userTypeAtom);
   const [logout, { loading }] = useMutation(mutations.logout, {
     onCompleted() {
       triggerRefetchUser(true);
+      setActiveOrder(defaultActiveOrder as IOrder);
+      setUserType(null);
     },
-    onError
+    onError,
   });
 
   const handleLogout = () => {

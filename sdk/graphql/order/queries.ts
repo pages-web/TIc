@@ -16,7 +16,18 @@ export const orderItemFields = `
     bonusCount
 `;
 
-export const currentOrder = gql`
+const activeOrderFields = `
+    _id
+    deliveryInfo
+    description
+    billType
+    registerNumber
+    items {
+      ${orderItemFields}
+    }
+`;
+
+const currentOrder = gql`
   query CurrentOrder(
     $customerId: String
     $saleStatus: String
@@ -33,18 +44,15 @@ export const currentOrder = gql`
       sortDirection: $sortDirection
       statuses: $statuses
     ) {
-      _id
-      deliveryInfo
-      description
-      paidDate
-      billType
-      registerNumber
-      totalAmount
-      mobileAmount
-      saleStatus
-      items {
-        ${orderItemFields}
-      }
+      ${activeOrderFields}
+    }
+  }
+`;
+
+const activeOrderDetail = gql`
+query ActiveOrderDetail($id: String, $customerId: String) {
+  orderDetail(_id: $id, customerId: $customerId) {
+      ${activeOrderFields}
     }
   }
 `;
@@ -186,6 +194,7 @@ const addresses = gql`
 const queries = {
   orderItemDetail,
   currentOrder,
+  activeOrderDetail,
   ordersCheckCompany,
   fullOrders,
   orderDetail,

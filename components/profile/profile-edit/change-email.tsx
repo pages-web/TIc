@@ -6,12 +6,12 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import * as z from 'zod';
 import { currentUserAtom } from '@/store/auth.store';
 import { useAtomValue } from 'jotai';
-import { CheckCircle, MailIcon } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { useUserEdit } from '@/sdk/hooks/auth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input';
 import { LoadingIcon } from '@/components/ui/loading';
 
 const formSchema = z.object({
-  email: z.string().email()
+  email: z.string().email(),
 });
 
 const ChangeEmail = () => {
@@ -28,16 +28,16 @@ const ChangeEmail = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     values: {
-      email: email || ''
-    }
+      email: email || '',
+    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     editUser({
       variables: {
         email: values.email,
-        _id
-      }
+        _id,
+      },
     });
   }
   return (

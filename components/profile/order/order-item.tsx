@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { IOrder } from '@/types/order.types';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { cn, getOrderStatus, readFile } from '@/lib/utils';
+import { cn, getOrderStatus } from '@/lib/utils';
 import cloudflareLoader from '@/lib/image-loader';
 import { useAtomValue } from 'jotai';
 import { configAtom } from '@/store/auth.store';

@@ -9,13 +9,11 @@ import {
 import { cartSheetAtom } from '@/store';
 import { Button } from '../ui/button';
 import { XIcon } from 'lucide-react';
-import Link from 'next/link';
-
-import Price from '../price/price';
 import { cartItemAtomAtoms } from '@/store/cart.store';
 import CartItem from './cart-item';
 import CartTotal from './cart-total';
 import CartEmpty from './cart-empty';
+import BuyButton from './buy-button';
 
 const Cart = () => {
   const [openSheet, setOpenSheet] = useAtom(cartSheetAtom);
@@ -54,14 +52,7 @@ const Cart = () => {
                 <CartTotal />
               </div>
             </div>
-            <Button
-              size="lg"
-              asChild
-              onClick={() => setOpenSheet(false)}
-              className="flex-none"
-            >
-              <Link href="/cart">Худалдан авах</Link>
-            </Button>
+            <BuyButton />
           </>
         ) : (
           <div className="flex-1 flex flex-col justify-center items-center gap-6">

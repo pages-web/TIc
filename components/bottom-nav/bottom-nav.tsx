@@ -19,7 +19,7 @@ import CartCount from '../cart/cart-count';
 import { useSetAtom } from 'jotai';
 import { cartSheetAtom } from '@/store';
 
-const getItems = (cartLineItemsCount?: number) => [
+const getItems = () => [
   {
     label: 'Эхлэл',
     Icon: HomeIcon,
@@ -90,40 +90,38 @@ const BottomNav = () => {
   );
 };
 
-export const BottomNavItem = memo(
-  ({
-    children,
-    path,
-    pathname,
-    label,
-    Icon,
-    onClick,
-    className,
-  }: ButtonProps & {
-    path: string;
-    label: string;
-    Icon: LucideIcon;
-    pathname: string;
-  }) => {
-    return (
-      <Button
-        className={cn(
-          'flex-col h-auto w-full gap-1 rounded-none px-0 pb-1.5 pt-3 relative hover:bg-active',
-          path === pathname && 'bg-active',
-          className
-        )}
-        key={label}
-        asChild
-        onClick={onClick}
-      >
-        <Link href={path}>
-          <Icon className="h-6 w-6" strokeWidth={1.8} />
-          <span className="capitalize text-xs font-bold">{label}</span>
-          {children}
-        </Link>
-      </Button>
-    );
-  }
-);
+export const BottomNavItem = memo(function Item({
+  children,
+  path,
+  pathname,
+  label,
+  Icon,
+  onClick,
+  className,
+}: ButtonProps & {
+  path: string;
+  label: string;
+  Icon: LucideIcon;
+  pathname: string;
+}) {
+  return (
+    <Button
+      className={cn(
+        'flex-col h-auto w-full gap-1 rounded-none px-0 pb-1.5 pt-3 relative hover:bg-active',
+        path === pathname && 'bg-active',
+        className
+      )}
+      key={label}
+      asChild
+      onClick={onClick}
+    >
+      <Link href={path}>
+        <Icon className="h-6 w-6" strokeWidth={1.8} />
+        <span className="capitalize text-xs font-bold">{label}</span>
+        {children}
+      </Link>
+    </Button>
+  );
+});
 
 export default BottomNav;

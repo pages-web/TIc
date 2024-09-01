@@ -30,8 +30,6 @@ const VariantSelector = ({
       params = { ...params, [field]: param };
     }
   });
-
-  console.log(fields);
   const { product } = getActiveProduct({ products, searchParams: params });
 
   return (

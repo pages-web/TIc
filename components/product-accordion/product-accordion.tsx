@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from '../ui/accordion';
-import Rate from '../ui/rate';
 import Reviews from './reviews';
 
 const ProductAccordion = ({

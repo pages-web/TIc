@@ -1,9 +1,8 @@
-import { IProduct } from '@/types/product.types';
 import Link from 'next/link';
 import Image from '../ui/image';
 import { TagIcon } from 'lucide-react';
 import { Button } from '../ui/button';
-import { useAtom, useAtomValue, useSetAtom, type Atom } from 'jotai';
+import { useAtom, useAtomValue, type Atom } from 'jotai';
 import { OrderItem } from '@/types/order.types';
 import Price from '../price/price';
 import { Counter, CounterButton, CounterInput } from '../counter/counter';
@@ -14,14 +13,27 @@ const CartProductCard = ({
 }: {
   cartItemAtom: Atom<OrderItem>;
 }) => {
-  const { _id, productName, unitPrice, count, productImgUrl, discountAmount } =
-    useAtomValue(cartItemAtom);
+  const {
+    _id,
+    productName,
+    unitPrice,
+    count,
+    productImgUrl,
+    discountAmount,
+    productId,
+  } = useAtomValue(cartItemAtom);
   const [loading, changeCartItem] = useAtom(updateCartAtom);
   return (
     <div className="relative flex first:border-t border-b border-neutral-200 lg:hover:shadow-lg min-w-[320px] py-4 lg:px-4 last:mb-0 last:border-b-0 lg:last:border-b">
       <div className="relative overflow-hidden rounded-md w-[100px] lg:w-[176px]">
         <Link href={`/product/${_id}`}>
-          <Image src={productImgUrl} alt="" width={300} height={300} />
+          <Image
+            src={productImgUrl}
+            alt=""
+            width={300}
+            height={300}
+            className="aspect-square"
+          />
         </Link>
         {(discountAmount || 0) > 0 && (
           <div className="absolute top-0 left-0 text-white bg-indigo-600 py-1 pl-1.5 pr-2 text-xs font-medium inline-flex items-center">
@@ -40,7 +52,7 @@ const CartProductCard = ({
           asChild
           variant="link"
         >
-          <Link href={`/product/${_id}`}>{productName}</Link>
+          <Link href={`/product/${productId}`}>{productName}</Link>
         </Button>
         <div className="items-center lg:mt-auto flex flex-wrap lg:flex-nowrap lg:justify-between lg:w-full gap-2">
           <Counter>
