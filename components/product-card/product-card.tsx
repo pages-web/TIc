@@ -25,7 +25,7 @@ const ProductCard = ({
           <Image
             src={attachment?.url || ''}
             alt=""
-            className="aspect-square w-full h-full absolute inset-0"
+            className="rounded-t-md aspect-square w-full h-full absolute inset-0"
             width={500}
             height={500}
             quality={100}
