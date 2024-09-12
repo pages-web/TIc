@@ -71,7 +71,7 @@ const Gallery = ({ attachments = [] }: { attachments: IAttachment[] }) => {
           {attachments.map((item, index) => (
             <CarouselItem
               className={cn(
-                'w-28 h-28 border-2 transition-colors pt-0 rounded-xl overflow-hidden p-0',
+                'w-28 h-28 border-2 transition-colors pt-0 rounded-xl overflow-hidden p-0 aspect-square',
                 selectedIndex === index
                   ? 'border-primary'
                   : 'border-transparent'
