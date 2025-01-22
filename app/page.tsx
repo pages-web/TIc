@@ -30,6 +30,7 @@ export default function Home() {
     <div className="min-h-screen">
       <MainBanner />
       <CategoryCard />
+      <h1>sds</h1>
       <Display />
       <div className="container flex items-center justify-between">
         <Heading title="Сүүлд нэмэгдсэн" className=" text-left lg:mb-5" />
