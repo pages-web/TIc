@@ -1,14 +1,14 @@
-'use client';
-import Autoplay from 'embla-carousel-autoplay';
+"use client";
+import Autoplay from "embla-carousel-autoplay";
 
-import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
-import Image from '../ui/image';
-import { IArticle } from '@/types/kb.types';
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+import Image from "../ui/image";
+import { IArticle } from "@/types/kb.types";
 
 const settings = {
   delay: {
-    lg: 4000,
-    sm: 2000,
+    lg: 3000,
+    sm: 3000,
     long: 3000,
   },
   width: {
@@ -17,25 +17,25 @@ const settings = {
     long: 768,
   },
   orientation: {
-    lg: 'horizontal',
-    sm: 'horizontal',
-    long: 'vertical',
+    lg: "horizontal",
+    sm: "horizontal",
+    long: "vertical",
   },
   className: {
-    lg: 'col-span-2 row-span-2  aspect-square lg:aspect-auto h-auto lg:mb-4',
-    sm: 'aspect-square rounded-[0.5em]',
-    long: 'col-span-2 aspect-[3/1] rounded-[0.5em]',
+    lg: "col-span-1 row-span-2 aspect-square md:aspect-auto h-auto md:mb-4",
+    sm: "col-span-1 row-span-2  aspect-square md:aspect-auto h-auto md:mb-4",
+    long: "col-span-1 aspect-[4/1] rounded-[0.5em]",
   },
 };
 
-type IOrientation = 'horizontal' | 'vertical';
+type IOrientation = "horizontal" | "vertical";
 
 const CarouselClient = ({
   items,
   size,
 }: {
   items: IArticle[];
-  size: 'lg' | 'sm' | 'long';
+  size: "lg" | "sm" | "long";
 }) => {
   return (
     <Carousel
@@ -49,24 +49,18 @@ const CarouselClient = ({
       ]}
       orientation={settings.orientation[size] as IOrientation}
     >
-      <CarouselContent containerClassname="h-full" className="h-full">
+      <CarouselContent containerClassname="h-full mt-5">
         {items.map((car) => (
-          <CarouselItem
-            className="h-full relative overflow-hidden rounded-[0.5em]"
-            key={car._id}
-          >
+          <CarouselItem className="h-full flex justify-center" key={car._id}>
             <Image
               src={car.image?.url}
-              width={settings.width[size]}
+              width={900}
               height={400}
-              className="absolute h-full w-full  object-cover overflow-hidden rounded-[0.5em]"
+              className="w-full h-[70vh] object-cover"
             />
           </CarouselItem>
         ))}
       </CarouselContent>
-      {size === 'long' && (
-        <div className="h-4 w-full absolute left-0 bottom-0 bg-white" />
-      )}
     </Carousel>
   );
 };

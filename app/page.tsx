@@ -1,9 +1,7 @@
 import { CategoryCard } from "@/components/category-card/category-card";
 import Display from "@/components/display/display-new";
+import GridBanner from "@/components/grid-banner/grid-banner";
 import { Heading } from "@/components/heading/heading";
-// import Display from '@/components/display/display';
-// import { Heading } from '@/components/heading/heading';
-import MainBanner from "@/components/main-banner/main-banner";
 import RecommendedProducts from "@/components/recommended-products/recommended-products";
 import { Button } from "@/components/ui/button";
 import { getConfig } from "@/sdk/queries/auth";
@@ -28,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <MainBanner />
+      <GridBanner />
       <CategoryCard />
       <Display />
       <div className="container flex items-center justify-between">
