@@ -38,7 +38,9 @@ export function CategoryNav({
       <NavigationMenuList className="max-w-full overflow-x-auto justify-start no-scrollbar">
         {(primaryCategories || []).map(({ _id, name, order }) => {
           const childrenCats = getChildren(_id);
-
+          {
+            console.log("childrenCats", childrenCats);
+          }
           if (childrenCats.length === 0)
             return (
               <NavigationMenuItem key={_id}>

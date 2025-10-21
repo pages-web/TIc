@@ -1,6 +1,5 @@
 import { CategoryCard } from "@/components/category-card/category-card";
 import Display from "@/components/display/display-new";
-import GridBanner from "@/components/grid-banner/grid-banner";
 import { Heading } from "@/components/heading/heading";
 import MainBanner from "@/components/main-banner/main-banner";
 import RecommendedProducts from "@/components/recommended-products/recommended-products";
