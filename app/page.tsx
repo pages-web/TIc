@@ -2,9 +2,11 @@ import { CategoryCard } from "@/components/category-card/category-card";
 import Display from "@/components/display/display-new";
 import GridBanner from "@/components/grid-banner/grid-banner";
 import { Heading } from "@/components/heading/heading";
+import MainBanner from "@/components/main-banner/main-banner";
 import RecommendedProducts from "@/components/recommended-products/recommended-products";
 import { Button } from "@/components/ui/button";
 import { getConfig } from "@/sdk/queries/auth";
+import { IPageProps } from "@/types";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next/types";
@@ -23,11 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Home() {
+export default async function Home(props: IPageProps) {
+  const { order } = await props.searchParams;
   return (
     <div className="min-h-screen">
-      <GridBanner />
-      <CategoryCard />
+      <MainBanner />
+      {/* <GridBanner /> */}
+      <CategoryCard activeOrder={order?.toString() || ""} />
       <Display />
       <div className="container flex items-center justify-between">
         <Heading title="Сүүлд нэмэгдсэн" className=" text-left lg:mb-5" />

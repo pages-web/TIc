@@ -1,31 +1,52 @@
-import { getConfig } from '@/sdk/queries/auth';
-import CategoryItem from './item';
-import { Heading } from '../heading/heading';
+import { getConfig } from "@/sdk/queries/auth";
+import CategoryItem from "./item";
+import CarouselCategoryCard from "./carousel";
+import { getCategories } from "@/sdk/queries/products";
+import { Suspense } from "react";
+import { Heading } from "../heading/heading";
 
-export type CategoryCardProps = {
-  //   items: CategoryWithImage[];
-};
-
-export async function CategoryCard({ ...attributes }: CategoryCardProps) {
+export async function CategoryCard({ activeOrder }: { activeOrder: string }) {
   const { config } = await getConfig();
+  const { categories } = await getCategories();
 
   if (!(config.initialCategoryIds || []).length) return null;
 
+  const primaryCategories = categories.filter((category) =>
+    config.initialCategoryIds.includes(category._id)
+  );
+
+  const sortCategories = (categories: any[]) => {
+    const specialCategory = categories.find(
+      (cat) => cat._id === process.env.NEXT_PUBLIC_SPECIAL_CATEGORY_ID
+    );
+    const normalCategories = categories.filter(
+      (cat) => cat._id !== process.env.NEXT_PUBLIC_SPECIAL_CATEGORY_ID
+    );
+    if (specialCategory) {
+      return [specialCategory, ...normalCategories];
+    }
+    return normalCategories;
+  };
+
+  const orders = sortCategories(primaryCategories).map(
+    (category) => category?.order || ""
+  );
+
   return (
-    <>
-      <Heading title="Онцлох ангилалууд" className="lg:mt-16 lg:mb-8" />
-      <div
-        className="container mb-10 lg:mb-16 flex flex-nowrap lg:flex-wrap lg:justify-center overflow-x-scroll no-scrollbar"
-        {...attributes}
-      >
-        {(config.initialCategoryIds || []).map((_id: string) => (
-          <CategoryItem
-            id={_id}
-            key={_id}
-            length={config.initialCategoryIds.length}
-          />
-        ))}
-      </div>
-    </>
+    <div className="my-10 md:my-16 container">
+      <Heading title="Онцлох ангилалууд" className="mb-4 md:mb-6" />
+      <Suspense>
+        <CarouselCategoryCard orders={orders}>
+          {sortCategories(primaryCategories).map((category) => (
+            <CategoryItem
+              {...category}
+              key={category._id}
+              length={config.initialCategoryIds.length}
+              activeOrder={activeOrder}
+            />
+          ))}
+        </CarouselCategoryCard>
+      </Suspense>
+    </div>
   );
 }
