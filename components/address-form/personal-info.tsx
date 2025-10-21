@@ -14,7 +14,7 @@ import { Separator } from '../ui/separator';
 const PersonalInfo = ({
   form
 }: {
-  form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof formSchema>>;
 }) => {
   return (
     <>

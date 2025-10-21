@@ -16,7 +16,7 @@ import { Toggle } from '../ui/toggle';
 const AddressInfo = ({
   form
 }: {
-  form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof formSchema>>;
 }) => {
   return (
     <>

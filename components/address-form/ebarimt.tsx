@@ -20,7 +20,7 @@ import { LoadingIcon } from '../ui/loading';
 const Ebarimt = ({
   form,
 }: {
-  form: UseFormReturn<z.infer<typeof formSchema>, any, undefined>;
+  form: UseFormReturn<z.infer<typeof formSchema>>;
 }) => {
   const billType = useAtomValue(billTypeAtom);
   const [isOrg, changeIsOrg] = useState(billType === '3');
